@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import daisyui from 'daisyui'
 
 export default {
   content: [
@@ -6,6 +7,9 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  daisyui: {
+    themes: ["lemonade", "dark", 'light'], // Укажите темы, которые хотите использовать
+  },
   theme: {
     extend: {
       colors: {
@@ -14,5 +18,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui],
 } satisfies Config;
+
