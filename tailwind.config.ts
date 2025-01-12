@@ -8,10 +8,16 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   daisyui: {
-    themes: ["lemonade", "dark", 'light'], // Укажите темы, которые хотите использовать
+    themes: [ "light", 'dark'], // Укажите темы, которые хотите использовать
   },
   theme: {
     extend: {
+		backgroundImage: {
+			mii: 'url(/menuImages/mainIntro.webp)'
+		},
+		screens: {
+			'custom-range': { min: '420px', max: '639px' }, // Диапазон от 420px до 640px
+		  },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

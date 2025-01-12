@@ -1,0 +1,5 @@
+[alias]
+  add = add .
+  commit = commit -m
+  push = push origin main
+  status = status 		

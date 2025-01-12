@@ -1,8 +1,9 @@
-function MainContainer() {
-	return ( 
-		<>
-		</>
-	 );
-}
+import ChildrenType from '@/types/children'
 
-export default MainContainer;
+export default function MainContainer({children}: ChildrenType) {
+  return (
+    <div>
+      {children}
+    </div>
+  )
+}
