@@ -1,5 +1,6 @@
 // import { Main } from "next/document";
 
+import FooterContainer from '@/components/footer/FooterContainer'
 import MainContainer from '@/components/main/Main'
 import MainIntro from '@/components/main/MainInto'
 import MainNavigation from '@/components/main/MainNavigation'
@@ -19,6 +20,7 @@ function Home() {
         <MainSalesHit />
         <MainSpecialOffers />
       </MainContainer>
+      <FooterContainer />
     </>
   )
 }
