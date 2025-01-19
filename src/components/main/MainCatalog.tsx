@@ -2,7 +2,7 @@
 function MainCatalog() {
   return (
     <div className="flex items-center bg-green-500 rounded-lg p-4 shadow-md">
-  <div className="flex items-center justify-center w-10 h-10 bg-green-700 rounded-lg">
+  <div className="flex items-center justify-center w-10 h-10  bg-green-700 rounded-lg">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="w-10 h-10 text-white"
