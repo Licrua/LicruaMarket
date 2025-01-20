@@ -5,13 +5,6 @@ const slides = [
       title: "Покупайте акционные товары",
       description: "И получайте вдвое больше бонусов",
       image: "/cart.png",
-      imgStyles: "absolute min-w-[200px] opacity-60 inset-x-2/4 inset-y-2/4 top-20 min-h-[210px]",
-      textColor: "text-black",
-      positions: [
-        { top: "10%", left: "20%" },
-        { top: "30%", left: "50%" },
-        { top: "50%", left: "80%" }
-      ],
       btnLinks: {
         prev: "#slide4",
         next: "#slide2"
@@ -24,8 +17,6 @@ const slides = [
       title: "Доставка бесплатно от 1000 ₽",
       description: "",
       image: "",
-      imgStyles: "",
-      textColor: "text-white",
       positions: [],
       btnLinks: {
         prev: "#slide1",
@@ -38,8 +29,6 @@ const slides = [
       title: "Закажи карту и накапливай бонусы",
       description: "",
       image: "/licruaCard.png",
-      imgStyles: "opacity-60 min-w-full inset-2/4",
-      textColor: "text-black",
       positions: [],
       btnLinks: {
         prev: "#slide2",
@@ -47,3 +36,5 @@ const slides = [
       }
     }
   ];
+
+  export default slides;
