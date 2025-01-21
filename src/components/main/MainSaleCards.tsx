@@ -1,4 +1,5 @@
 import PromoProductsData from '@/types/cards'
+import Headline from '../generalComponents/HeadLine'
 
 async function MainSaleCards() {
   const res = await fetch(
@@ -13,11 +14,13 @@ async function MainSaleCards() {
 
   return (
     <div className="grid grid-cols-1 items-center p-10 gap-8">
-      <h2 className="text-3xl font-bold text-center text-red-600">
-        🔥 Горячие цены 🔥
-      </h2>
+      <Headline text='Горячие цены 🔥' background='bg-purple-300'  />
+      {/* <h2 className="text-3xl font-bold text-center text-red-600">
+
+         Горячие цены 
+      </h2> */}
       {posts.map(({ id, category, currentPrice, oldPrice, image, name }) => (
-        <div key={id} className="card  bg-base-100 w-98 shadow-xl">
+        <div key={id} className="card bg-base-100 w-98 shadow-xl">
           <figure>
             <img
               src={image}

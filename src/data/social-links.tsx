@@ -1,4 +1,6 @@
-const socialLinks = [
+import SocialLink from "@/types/social-media";
+
+const socialLinks: SocialLink[] = [
   {
     id: 'vk',
     name: 'VK',

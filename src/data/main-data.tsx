@@ -1,7 +1,4 @@
-// type featuresType = {
-// 	id: number, 
-// 	text: string,
-// }[]
+
 
 import FeaturesType from "@/types/features";
 

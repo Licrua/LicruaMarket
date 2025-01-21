@@ -1,7 +1,7 @@
 
 function MainSearch() {
   return (
-	<div className="join">
+	<div className="join ">
   <div>
     <div>
       <input className="input input-bordered w-25 cus sm:w-auto  join-item" placeholder="Search" />

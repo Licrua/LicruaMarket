@@ -1,4 +1,6 @@
+import playfairDisplay from '@/fonts/header-font'
 import { newProducts } from '@/types/cards'
+import Headline from '../generalComponents/HeadLine'
 async function MainNewCards() {
   const res = await fetch(
     'https://678aa3addd587da7ac2af1bd.mockapi.io/api/projectList/newGoods'
@@ -12,12 +14,10 @@ async function MainNewCards() {
 
   return (
     <>
-      <h2 className="text-3xl font-bold text-center text-red-600">
-	  🆕 Новинки  🆕
-      </h2>
-      <div className="carousel w-screen py-20 rounded-box">
+      <Headline text={"Новинки 🆕"} background={'bg-red-50'}  />
+      <div className="carousel  w-full py-5 rounded-box">
         {products?.map((product) => (
-          <div className="carousel-item p-5" key={product.id}>
+          <div className="carousel-item  py-5" key={product.id}>
             <div>
               <img
                 src={product.image}

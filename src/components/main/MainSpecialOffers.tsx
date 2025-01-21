@@ -1,12 +1,11 @@
 import slides from '@/data/offers-data'
-import positions from '@/data/positions'
 import playfairDisplay from '@/fonts/header-font'
 
 function MainSpecialOffers() {
   return (
            
 <div className="flex p-5 justify-center">
-      <div className="carousel w-full h-[300px] flex">
+      <div className="carousel w-full h-[300px] min-h-[300px] flex">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -14,7 +13,7 @@ function MainSpecialOffers() {
             className={`carousel-item overflow-hidden bg-no-repeat relative ${index === 2 ? 'bg-purple-500' : 'bg-green-400'} flex justify-center  w-full py-10`}
             style={slide.bgImage ? { backgroundImage: `url(${slide.bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
           >
-            <h1 className={`absolute ${playfairDisplay.className} z-10  leading-tight tracking-wider top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-3xl font-extrabold text-white`}>
+            <h1 className={`absolute ${playfairDisplay.className} tracking-widest z-10  leading-tight  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-3xl font-extrabold text-white`}>
               {slide.title}
             </h1> 
             {slide.image && (

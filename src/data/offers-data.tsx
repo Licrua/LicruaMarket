@@ -1,4 +1,6 @@
-const slides = [
+import Slide from "@/types/slides";
+
+const slides: Slide[] = [
     {
       id: "slide1",
       bgColor: "#E5FFDE",
@@ -17,7 +19,6 @@ const slides = [
       title: "Доставка бесплатно от 1000 ₽",
       description: "",
       image: "",
-      positions: [],
       btnLinks: {
         prev: "#slide1",
         next: "#slide3"
@@ -29,7 +30,6 @@ const slides = [
       title: "Закажи карту и накапливай бонусы",
       description: "",
       image: "/licruaCard.png",
-      positions: [],
       btnLinks: {
         prev: "#slide2",
         next: "#slide1"
