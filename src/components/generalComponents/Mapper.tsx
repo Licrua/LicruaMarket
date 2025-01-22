@@ -8,7 +8,7 @@ const DynamicMap = dynamic(() => import('./MapComponent'), { ssr: false })
 
 const Mapper = () => {
   return (
-    <div className='h-[200px] w-full mb-5'>
+    <div className='w-full mb-5'>
       <DynamicMap />
     </div>
   )

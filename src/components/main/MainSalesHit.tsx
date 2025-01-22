@@ -12,11 +12,10 @@ async function MainLeaderCards() {
   const items: newProducts = await res.json()
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center p-10 gap-8">
-      <Headline text='Лидеры продаж 🌟' background='bg-red-100' />
-      {/* <h2 className="text-3xl font-bold text-center text-red-600">
-		  🌟 Лидеры продаж 🌟
-		</h2> */}
+    <div className="grid grid-cols-1 md:grid-cols-3 items-center p-10 gap-8">
+		<div className='col-span-full justify-center'>
+      <Headline text='🌟 Лидеры продаж 🌟' background='bg-red-100' />
+		</div>
       {items.map(({ id, name, currentPrice, image, category }) => (
         <div key={id} className="card bg-base-100 w-98 shadow-xl">
           <figure>

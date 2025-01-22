@@ -1,7 +1,5 @@
-// import { Main } from "next/document";
 
 import FooterContainer from '@/components/footer/FooterContainer'
-import MapComponent from '@/components/generalComponents/MapComponent'
 import Mapper from '@/components/generalComponents/Mapper'
 import MainContainer from '@/components/main/Main'
 import MainIntro from '@/components/main/MainInto'
@@ -31,7 +29,6 @@ function Home() {
         <MainNewCards />
         <MainSalesHit />
         <MainSpecialOffers />
-        {/* <MapComponent /> */}
         <Mapper />
       </MainContainer>
       <FooterContainer />

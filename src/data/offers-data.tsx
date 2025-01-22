@@ -4,9 +4,9 @@ const slides: Slide[] = [
     {
       id: "slide1",
       bgColor: "#E5FFDE",
-      title: "Покупайте акционные товары",
+      title: "Покупайте акционные товары по скидке",
       description: "И получайте вдвое больше бонусов",
-      image: "/cart.png",
+      image: "/bc-sale.jpg",
       btnLinks: {
         prev: "#slide4",
         next: "#slide2"
@@ -15,7 +15,7 @@ const slides: Slide[] = [
     {
       id: "slide2",
       bgColor: "transparent",
-      bgImage: "https://png.pngtree.com/thumb_back/fh260/back_our/20190614/ourmid/pngtree-happy-shopping-light-spot-poster-background-image_122448.jpg",
+      bgImage: "/bc-delivery.jpg",
       title: "Доставка бесплатно от 1000 ₽",
       description: "",
       image: "",

@@ -39,7 +39,7 @@ const MapComponent = () => {
     <MapContainer
       center={[47.222078, 39.720358]} // Центр карты (Ростов-на-Дону)
       zoom={13}
-      className="h-[200px] mb-10 w-full"
+      className=" h-[500px] max-h-[500px] mb-10 w-full"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

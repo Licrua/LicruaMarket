@@ -6,7 +6,7 @@ const HeaderMenu = () => (
       <ul className="menu menu-vertical sm:menu-horizontal menu-xs sm:menu-xl  p-1 mr-8 sm:mr-0  sm:menu-md bg-base-200 rounded-box">
         {menuItems.map((item, index) => (
           <li key={index}>
-            <a href="">
+            <a href={item.anchor}>
               <img
                 src={item.src}
                 className="w-4 min-w-3 sm:w-5"

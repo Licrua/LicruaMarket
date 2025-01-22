@@ -1,4 +1,3 @@
-import playfairDisplay from '@/fonts/header-font'
 import { newProducts } from '@/types/cards'
 import Headline from '../generalComponents/HeadLine'
 async function MainNewCards() {
@@ -14,7 +13,7 @@ async function MainNewCards() {
 
   return (
     <>
-      <Headline text={"Новинки 🆕"} background={'bg-red-50'}  />
+      <Headline text={"🆕 Новинки 🆕"} background={'bg-red-50'}  />
       <div className="carousel  w-full py-5 rounded-box">
         {products?.map((product) => (
           <div className="carousel-item  py-5" key={product.id}>
@@ -22,7 +21,7 @@ async function MainNewCards() {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-64 p-1 object-cover bg-center rounded-t-lg"
+                className="w-full max-w-[386px] h-64 p-1 object-cover bg-center rounded-t-lg"
               />
               <div className="card bg-base-100 w-96 shadow-xl mt-4">
                 <div className="card-body ">
