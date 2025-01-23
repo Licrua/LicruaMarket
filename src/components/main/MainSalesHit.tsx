@@ -1,5 +1,6 @@
 import { newProducts } from '@/types/cards'
 import Headline from '../generalComponents/HeadLine'
+import CardImage from '../generalComponents/CardImage'
 
 async function MainLeaderCards() {
   const res = await fetch(
@@ -13,19 +14,15 @@ async function MainLeaderCards() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 items-center p-10 gap-8">
-		<div className='col-span-full justify-center'>
-      <Headline text='🌟 Лидеры продаж 🌟' background='bg-red-100' />
-		</div>
+      <div className="col-span-full justify-center">
+        <Headline text="🌟 Лидеры продаж 🌟" background="bg-red-100" />
+      </div>
       {items.map(({ id, name, currentPrice, image, category }) => (
-        <div key={id} className="card bg-base-100 w-98 shadow-xl">
+        <div key={id} className="card bg-base-100  max-h-[600px] w-98 shadow-xl">
           <figure>
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-64 object-cover bg-center rounded-t-lg"
-            />
+            <CardImage src={image} alt={name} />
           </figure>
-          <div className="card-body justify-center gap-3 items-center">
+          <div className="card-body justify-center lg:max-h-[244px] gap-3  items-center">
             <div className="flex flex-col gap-2 items-center ">
               <h2 className="card-title tracking-widest">{name}</h2>
               <div className="badge badge-primary ml-2">Лидер продаж</div>

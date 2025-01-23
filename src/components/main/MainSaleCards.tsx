@@ -1,5 +1,6 @@
 import PromoProductsData from '@/types/cards'
 import Headline from '../generalComponents/HeadLine'
+import CardImage from '../generalComponents/CardImage'
 
 async function MainSaleCards() {
   const res = await fetch(
@@ -21,11 +22,7 @@ async function MainSaleCards() {
         {posts.map(({ id, category, currentPrice, oldPrice, image, name }) => (
           <div key={id} className="card bg-base-100  shadow-xl">
             <figure>
-              <img
-                src={image}
-                alt={name}
-                className="w-full max-h-[350px] h-[300px] object-cover"
-              />
+              <CardImage src={image} alt={name} />
             </figure>
             <div className="card-body justify-center gap-3 items-center">
               <div className="flex flex-col gap-2 items-center ">
