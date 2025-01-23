@@ -17,7 +17,3 @@ type PromoProduct =  {
 
   export default PromoProduct;
   
-//   export default interface PromoProductsData {
-// 	promoProducts: PromoProduct[];
-//   }
-  

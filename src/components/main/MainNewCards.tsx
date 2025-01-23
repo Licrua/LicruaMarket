@@ -20,7 +20,6 @@ async function MainNewCards() {
           <div className="carousel-item w-[300px]  py-5" key={product.id}>
             <div>
               <CardImage src={product.image} alt={product.name} />
-           
               <div className="card bg-base-100  shadow-xl mt-4">
                 <div className="card-body">
                   <h2 className="card-title">{product.name}</h2>

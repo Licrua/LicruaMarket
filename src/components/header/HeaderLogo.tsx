@@ -6,7 +6,7 @@ const HeaderLogo = () => {
       <Link href={'/'}>
         <img
           src="logo.png"
-          className="min-w-[100px]   mt-5  sm:w-[190px] max-w-[10rem] "
+          className="min-w-[100px] mt-5  sm:w-[190px] max-w-[10rem] "
           alt="logo"
         />
       </Link>
