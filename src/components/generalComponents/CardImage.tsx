@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FavoriteButton from './FavoriteButton'
 
-function CardImage({ src, alt }: { src: string; alt: string }) {
+function CardImage({ src, alt, id }: { src: string; alt: string; id: number }) {
   return (
     <div className="relative w-full">
       <img
@@ -10,7 +10,7 @@ function CardImage({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         className="w-full relative  h-[300px] p-1 object-cover bg-center rounded-lg"
       />
-      <FavoriteButton />
+      <FavoriteButton id={id} />
     </div>
   )
 }
