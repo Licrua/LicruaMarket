@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "clsx": "^2.1.1",
+    "firebase": "^11.2.0",
     "leaflet": "^1.9.4",
     "next": "15.1.4",
     "next-themes": "^0.4.4",

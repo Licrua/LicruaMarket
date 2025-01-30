@@ -4,8 +4,8 @@ import Product from '@/types/product'
 import useFavoriteStore from '@/storage/storage'
 
 function ProductCard({ product }: { product: Product }) {
+  console.log('product', product)
 
- 
   return (
     <div className="card bg-base-100 max-h-[568px] shadow-xl">
       <figure>

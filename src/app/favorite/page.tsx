@@ -31,7 +31,6 @@ function Favorite() {
           localStorage.setItem('fav', JSON.stringify(favoriteProducts))
         }
 
-        // Обновляем состояние
         setFood(favoriteProducts || [])
       } catch (error) {
         console.error('Ошибка при загрузке избранных товаров:', error)
@@ -57,7 +56,7 @@ function Favorite() {
       <FavoriteDivider />
       <div className="grid grid-cols-1 sm:grid-cols-2 m-10 lg:grid-cols-3 gap-6 mt-8">
         {food.length > 0 ? (
-          food.map((product) => (
+          food?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (

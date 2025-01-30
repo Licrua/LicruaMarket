@@ -1,5 +1,5 @@
 type Product = {
-  id: number | string
+  id: number
   name: string
   currentPrice: number
   image: string
