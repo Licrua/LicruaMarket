@@ -20,7 +20,8 @@ const Avatar = () => (
         <Link href={'/'}>Настройки</Link>
       </li>
       <li>
-        <Link href={'/authorization'}>Войти</Link>
+        <Link href={'/signIn'}>
+		Войти</Link>
       </li>
     </ul>
   </div>

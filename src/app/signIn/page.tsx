@@ -1,34 +1,38 @@
 'use client'
 import { useFormSubmit } from '@/hooks/useFormSubmit'
 import notify from '@/utils/notify'
-import { submitForm } from '@/utils/submitForm'
+import { submitLogin } from '@/utils/submitLogin'
+// Предположим, что у вас есть серверная функция для входа (sign in)
+// import { submitSignIn } from '@/utils/submitSignIn'
 import Link from 'next/link'
 import { startTransition, useActionState } from 'react'
 
-function SignUp() {
-  const [state, formAction, isPending] = useActionState(submitForm, null)
-  const { onSubmit } = useFormSubmit(formAction, notify.userRegistered)
+function SignIn() {
+  // useActionState возвращает массив с текущим состоянием,
+  // функцией для вызова серверного действия и флагом загрузки
+  const [state, signInAction, isPending] = useActionState(submitLogin, null)
+  const { onSubmit } = useFormSubmit(signInAction, notify.userLoggedIn)
 
   //   const onSubmit = (e) => {
-  //     e.preventDefault()
-  //     notify.userRegistered() // Вызывается в клиентском коде
-  //     // formAction(new FormData(e.target)) // Отправка данных формы
+  //     e.preventDefault() // Отменяем стандартное поведение браузера (перезагрузка страницы)
+  //     notify.userLoggedIn() // Вызываем уведомление о начале входа (например, "Вы вошли в систему!")
+
+  //     // Оборачиваем вызов серверного действия в startTransition,
+  //     // чтобы обновление происходило как обновление низкого приоритета
   //     startTransition(() => {
-  //       formAction(new FormData(e.target))
+  //       // Передаём данные формы в серверное действие. new FormData(e.target) создаёт объект с данными формы.
+  //       signInAction(new FormData(e.target))
   //     })
   //   }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col ">
-        <div className="text-center ">
-          <h1 className="text-5xl py-3 font-bold">Регистрация</h1>
-          <span className="bg-purple-200 p-1">Добро пожаловать!</span>
-          <p className="mt-3">
-            <em>
-              Зарегистрируйтесь, чтобы начать пользоваться нашим сервисом.
-              Укажите свои данные ниже.
-            </em>
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="text-center lg:text-left">
+          <h1 className="text-5xl font-bold">Войдите сейчас!</h1>
+          <p className="py-6">
+            Здесь вы можете войти в систему, используя свою электронную почту и
+            пароль. Если у вас еще нет аккаунта, зарегистрируйтесь.
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -51,31 +55,24 @@ function SignUp() {
               </label>
               <input
                 type="password"
-                name="password"
                 placeholder="Введите пароль"
                 className="input input-bordered"
+                name="password"
                 required
               />
-            </div>
-            <div className="form-control">
               <label className="label">
-                <span className="label-text">Подтвердите пароль</span>
+                <a href="#" className="label-text-alt link link-hover">
+                  Забыли пароль?
+                </a>
               </label>
-              <input
-                type="confirmPassword"
-                name="confirmPassword"
-                placeholder="Подтвердите пароль"
-                className="input input-bordered"
-                required
-              />
             </div>
             <div className="form-control mt-6">
               <button
-                onClick={() => console.log()}
+                type="submit"
                 disabled={isPending}
                 className="btn btn-primary"
               >
-                {isPending ? 'Отправка...' : 'Зарегистрироваться'}
+                {isPending ? 'Вход...' : 'Войти'}
               </button>
               {state?.message && (
                 <p className="text-green-500 mt-2 text-center">
@@ -87,9 +84,9 @@ function SignUp() {
               )}
               <div className="divider divider-neutral">Или</div>
               <div>
-                <Link href={'/logIn'}>
+                <Link href={'/signUp'}>
                   <button className="btn text-center w-full btn-primary">
-                    Войти
+                    Зарегистрироваться
                   </button>
                 </Link>
               </div>
@@ -101,4 +98,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default SignIn

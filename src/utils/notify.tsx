@@ -9,9 +9,7 @@ const notify = {
           Товар добавлен в избранное!
         </p>
         <Link href="/favorite">
-		<p className='underline'>
-            Перейти в избранное?
-		</p>
+          <p className="underline">Перейти в избранное?</p>
         </Link>
       </div>,
       { autoClose: 3000 }
@@ -20,6 +18,23 @@ const notify = {
     toast(
       <div className="bg-red-400 p-3 rounded-lg">
         <p style={{ color: 'purple', margin: 0 }}>Товар удален из избранного</p>
+      </div>,
+      { autoClose: 3000 }
+    ),
+  userRegistered: () =>
+    toast(
+      <div className="bg-blue-300 p-3 rounded-lg">
+        <p style={{ color: 'purple', margin: 0 }}>
+          Регистрация прошла успешно!
+        </p>
+          <p className="underline">Переходим ко входу...</p>
+      </div>,
+      { autoClose: 3000 }
+    ),
+  userLoggedIn: () =>
+    toast(
+      <div className="bg-green-300 p-3 rounded-lg">
+        <p style={{ color: 'purple', margin: 0 }}>Вы успешно вошли!</p>
       </div>,
       { autoClose: 3000 }
     ),
