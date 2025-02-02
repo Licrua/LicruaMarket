@@ -13,17 +13,7 @@ function SignIn() {
   const [state, signInAction, isPending] = useActionState(submitLogin, null)
   const { onSubmit } = useFormSubmit(signInAction, notify.userLoggedIn)
 
-  //   const onSubmit = (e) => {
-  //     e.preventDefault() // Отменяем стандартное поведение браузера (перезагрузка страницы)
-  //     notify.userLoggedIn() // Вызываем уведомление о начале входа (например, "Вы вошли в систему!")
 
-  //     // Оборачиваем вызов серверного действия в startTransition,
-  //     // чтобы обновление происходило как обновление низкого приоритета
-  //     startTransition(() => {
-  //       // Передаём данные формы в серверное действие. new FormData(e.target) создаёт объект с данными формы.
-  //       signInAction(new FormData(e.target))
-  //     })
-  //   }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
