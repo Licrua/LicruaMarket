@@ -4,7 +4,7 @@ type FormButtonProps = {
 }
 
 const FormButton = ({ isPending, status }: FormButtonProps) => (
-  <button disabled={isPending} className="btn btn-primary">
+  <button disabled={isPending} className="btn btn-primary w-full">
     {isPending ? 'Отправка...' : status}
   </button>
 )

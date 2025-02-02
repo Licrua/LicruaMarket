@@ -3,12 +3,14 @@ import AuthContainer from '@/components/authorization/AuthContainer'
 import FormButton from '@/components/authorization/FormButton'
 import InputField from '@/components/authorization/InputField'
 import StatusMessage from '@/components/authorization/StatusMessage'
+import signupFields from '@/data/auth-fields'
+import SignInFields from '@/data/auth-fields'
 import fields from '@/data/auth-fields'
 import { useFormSubmit } from '@/hooks/useFormSubmit'
 import notify from '@/utils/notify'
 import { submitForm } from '@/utils/submitForm'
 // import Link from 'next/link'
-import { startTransition, useActionState } from 'react'
+import { useActionState } from 'react'
 
 function SignUp() {
   const [state, formAction, isPending] = useActionState(submitForm, null)
@@ -22,7 +24,7 @@ function SignUp() {
               Укажите свои данные ниже."
     >
       <form onSubmit={onSubmit} className="card-body">
-        {fields.map((field) => (
+        {signupFields.map((field) => (
           <InputField
             key={field.id}
             label={field.label}
