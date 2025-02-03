@@ -4,10 +4,12 @@ function StatusMessage({
   state:
     | {
         error: string
+        sucess: string
         message?: undefined
       }
     | {
         message: string
+        sucess: string
         error?: undefined
       }
     | null

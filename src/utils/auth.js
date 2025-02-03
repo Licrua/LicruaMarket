@@ -9,8 +9,12 @@ export const registerUser = async (email, password) => {
       email,
       password
     )
+	
     const user = userCredential?.user
+    console.log('User registered:', email)
+    console.log('User registered:', password)
     console.log('User registered:', user)
+
     return user
   } catch (error) {
     console.error('Error registering user:', error.message)
@@ -26,9 +30,6 @@ export const loginUser = async (email, password) => {
       password
     )
     const user = userCredential?.user
-    if (user) {
-      return user
-    }
     console.log('User logged in:', user)
     return user // Возвращаем user, чтобы знать, что вход прошел успешно
   } catch (error) {

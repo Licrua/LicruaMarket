@@ -1,10 +1,12 @@
+import Link from 'next/link'
+
 type FormButtonProps = {
   isPending: boolean
   status: string
 }
 
 const FormButton = ({ isPending, status }: FormButtonProps) => (
-  <button disabled={isPending} className="btn btn-primary w-full">
+  <button disabled={isPending} type="submit" className="btn btn-primary w-full">
     {isPending ? 'Отправка...' : status}
   </button>
 )

@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-const LoginLink: React.FC = () => (
+const LoginLink = () => (
   <div>
-    <Link href={'/logIn'}>
+    <Link href={'/signIn'}>
       <button className="btn text-center w-full btn-primary">Войти</button>
     </Link>
   </div>
-);
+)
 
-export default LoginLink;
+export default LoginLink
