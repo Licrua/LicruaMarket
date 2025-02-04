@@ -19,13 +19,11 @@ function Favorite() {
     const func = async () => {
       try {
         const products = await fetchAndStoreProducts()
-        console.log('Fetched products:', products)
 
         const favoriteProducts = products?.filter((product) =>
           favoriteIds.includes(product.id)
         )
 
-        console.log('Favorite products:', favoriteProducts)
 
         if (favoriteProducts && favoriteProducts.length > 0) {
           localStorage.setItem('fav', JSON.stringify(favoriteProducts))
@@ -42,7 +40,6 @@ function Favorite() {
 
 
 
-  console.log(food) // Это для отладки, можете удалить, если не нужно
 
   if (!food) {
     return <CardSkeleton />

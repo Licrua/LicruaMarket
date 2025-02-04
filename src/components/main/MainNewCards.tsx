@@ -16,7 +16,7 @@ async function MainNewCards() {
   return (
     <>
       <Headline text={'🆕 Новинки 🆕'} background={'bg-red-50'} />
-      <div className="carousel  w-full py-5 rounded-box">
+      <div className="carousel mx-5  w-full py-5 gap-2 px-10 rounded-box">
         {products?.map((product) => (
           <div className="carousel-item w-[300px]  py-5" key={product.id}>
             <ProductCard product={product} key={product.id} />

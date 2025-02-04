@@ -4,6 +4,8 @@
 // import { auth } from '../../lib/fireBase'
 // import { useRouter } from 'next/navigation'
 
+import AuthForm from '@/components/authorization/Authorization'
+
 // // Импорт готовых компонентов
 // import AuthContainer from '@/components/authorization/AuthContainer'
 // import InputField from '@/components/authorization/InputField'
@@ -108,68 +110,73 @@
 // }
 
 // export default SignUp
-'use client'
-import { useState } from 'react'
-import { useSignUp } from '@/hooks/useSignUp'
-import AuthContainer from '@/components/authorization/AuthContainer'
-import FormButton from '@/components/authorization/FormButton'
-import InputField from '@/components/authorization/InputField'
-import LoginLink from '@/components/authorization/LoginLink'
-import signupFields from '@/data/auth-fields'
+// 'use client'
+// import { useState } from 'react'
+// import { useSignUp } from '@/hooks/useSignUp'
+// import AuthContainer from '@/components/authorization/AuthContainer'
+// import FormButton from '@/components/authorization/FormButton'
+// import InputField from '@/components/authorization/InputField'
+// import LoginLink from '@/components/authorization/LoginLink'
+// import signupFields from '@/data/auth-fields'
 
-const SignUp = () => {
-  const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
-  const { onSubmit, isPending, error } = useSignUp()
+// const SignUp = () => {
+//   const [formValues, setFormValues] = useState({
+//     email: '',
+//     password: '',
+//     confirmPassword: '',
+//   })
+//   const { onSubmit, isPending, error } = useSignUp()
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormValues((prev) => ({ ...prev, [name]: value }))
-  }
+//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const { name, value } = e.target
+//     setFormValues((prev) => ({ ...prev, [name]: value }))
+//   }
 
-  return (
-    <AuthContainer
-      header="Регистрация"
-      greet="Добро пожаловать!"
-      description="Зарегистрируйтесь, чтобы начать пользоваться нашим сервисом."
-    >
-      <form onSubmit={(e) => onSubmit(e, formValues)} className="card-body">
-        {signupFields.map((field) => (
-          <InputField
-            key={field.id}
-            {...field}
-            value={formValues[field.name as keyof typeof formValues] || ''}
-            onChange={handleInputChange}
-          />
-        ))}
+//   return (
+//     <AuthContainer
+//       header="Регистрация"
+//       greet="Добро пожаловать!"
+//       description="Зарегистрируйтесь, чтобы начать пользоваться нашим сервисом."
+//     >
+//       <form onSubmit={(e) => onSubmit(e, formValues)} className="card-body">
+//         {signupFields.map((field) => (
+//           <InputField
+//             key={field.id}
+//             {...field}
+//             value={formValues[field.name as keyof typeof formValues] || ''}
+//             onChange={handleInputChange}
+//           />
+//         ))}
 
-        <div className="form-control mt-6">
-          <FormButton isPending={isPending} status="Зарегистрироваться" />
-		    {error && (
-            <div className="mt-4 p-4 border border-red-400 bg-red-50 rounded text-center">
-              <p className="text-red-600 font-medium">{error}</p>
-              <em className="block mt-2 text-sm text-gray-600">
-                С кодом ошибки вы можете ознакомиться здесь –{' '}
-                <a
-                  href="https://firebase.google.com/docs/auth/admin/errors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-600"
-                >
-                  документация Firebase
-                </a>
-              </em>
-            </div>
-          )}
-          <div className="divider divider-neutral">Или</div>
-          <LoginLink />
-        </div>
-      </form>
-    </AuthContainer>
-  )
-}
+//         <div className="form-control mt-6">
+//           <FormButton isPending={isPending} status="Зарегистрироваться" />
+// 		    {error && (
+//             <div className="mt-4 p-4 border border-red-400 bg-red-50 rounded text-center">
+//               <p className="text-red-600 font-medium">{error}</p>
+//               <em className="block mt-2 text-sm text-gray-600">
+//                 С кодом ошибки вы можете ознакомиться здесь –{' '}
+//                 <a
+//                   href="https://firebase.google.com/docs/auth/admin/errors"
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="text-blue-500 underline hover:text-blue-600"
+//                 >
+//                   документация Firebase
+//                 </a>
+//               </em>
+//             </div>
+//           )}
+//           <div className="divider divider-neutral">Или</div>
+//           <LoginLink />
+//         </div>
+//       </form>
+//     </AuthContainer>
+//   )
+// }
 
+// export default SignUp
+
+// import AuthForm from '@/components/authorization/AuthForm'
+
+const SignUp = () => <AuthForm type="signUp" />
 export default SignUp

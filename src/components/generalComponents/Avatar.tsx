@@ -13,6 +13,8 @@ const Avatar = () => {
   useEffect(() => {
     // Устанавливаем наблюдателя
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+		console.log('auth', auth);
+		console.log('user', user);
       setUser(user) // Обновляем состояние, когда пользователь аутентифицируется или выходит
     })
 
@@ -31,13 +33,14 @@ const Avatar = () => {
         role="button"
         className="btn btn-ghost btn-circle avatar"
       >
-        <div className="w-10 rounded-full">
+        <div className="w-10 p-1 rounded-full">
           <img
             alt="User Avatar"
-            src={user?.photoURL || '/avatar.avif'}
+            // src={user?.photoURL || '/avatar.avif'}
+			srcSet={user ? '/auth.png' : '/unauth.png'}
             referrerPolicy="no-referrer"
           />
-        </div>
+        </div>	
       </div>
       <ul
         tabIndex={0}

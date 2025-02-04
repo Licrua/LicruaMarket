@@ -7,7 +7,7 @@ function ProductCard({ product }: { product: Product }) {
   console.log('product', product)
 
   return (
-    <div className="card bg-base-100 max-h-[568px] shadow-xl">
+    <div className="card bg-base-100 max-h-[568px] border-2 rounded-md shadow-xl">
       <figure>
         <CardImage id={product.id} src={product.image} alt={product.name} />
       </figure>

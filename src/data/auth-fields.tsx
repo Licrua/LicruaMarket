@@ -1,4 +1,4 @@
-const signupFields = [
+export const signupFields = [
   {
     id: 1,
     label: 'Электронная почта',
