@@ -1,10 +1,10 @@
 // import useFavoriteStore from '@/storage/storage'
 
-import useFavoritesStore from '@/storage/storage'
+import useFavoritesStore from '@/storage/FavoriteStorage'
 
 export const fetchAndStoreProducts = async () => {
-//   const { favoriteIds } =  useFavoritesStore.getState();
-//   console.log('favoriteIdsssss', favoriteIds)
+  //   const { favoriteIds } =  useFavoritesStore.getState();
+  //   console.log('favoriteIdsssss', favoriteIds)
 
   //   const { favoriteIds } = useFavoritesStore()
   try {
@@ -33,7 +33,7 @@ export const fetchAndStoreProducts = async () => {
     console.log(combinedData)
 
     // setProducts(combinedData)
-	// if (favoriteIds.length > 1) 
+    // if (favoriteIds.length > 1)
     // const filteredData = combinedData.filter(
     //   (product) => favoriteIds.includes(product.id) // Предполагается, что у продукта есть поле id
     // )

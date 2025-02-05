@@ -4,6 +4,7 @@ import './globals.css'
 import Container from '@/components/generalComponents/Container'
 import Header from '@/components/header/Header'
 import ToastProvider from '@/components/generalComponents/ToastProvider'
+// import { initializeAuthListener } from '@/storage/AuthStorage'
 
 export const metadata: Metadata = {
   title: 'Licrua Shop',
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body>
-		<ToastProvider/>
+        <ToastProvider />
         <Container>
           <Header />
           {children}

@@ -4,12 +4,10 @@ import FavoriteCard from '@/components/favoritePage/FavoriteCard'
 import FavoriteDivider from '@/components/favoritePage/FavoriteDivider'
 import CardSkeleton from '@/components/generalComponents/CardSkeleton'
 import ProductCard from '@/components/generalComponents/ProductCard'
-import useFavoritesStore from '@/storage/storage'
+import useFavoritesStore from '@/storage/FavoriteStorage'
 import Product from '@/types/product'
 import { fetchAndStoreProducts } from '@/utils/fetchAndStoreProducts'
 import { useEffect, useState } from 'react'
-
-
 
 function Favorite() {
   const { favoriteIds } = useFavoritesStore()
@@ -24,7 +22,6 @@ function Favorite() {
           favoriteIds.includes(product.id)
         )
 
-
         if (favoriteProducts && favoriteProducts.length > 0) {
           localStorage.setItem('fav', JSON.stringify(favoriteProducts))
         }
@@ -37,9 +34,6 @@ function Favorite() {
 
     func()
   }, [favoriteIds]) // Запускать каждый раз, когда изменяются favoriteIds
-
-
-
 
   if (!food) {
     return <CardSkeleton />

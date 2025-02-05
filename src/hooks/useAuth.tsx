@@ -6,7 +6,6 @@ import {
 } from 'firebase/auth'
 import { auth } from '@/lib/fireBase'
 import notify from '@/utils/notify'
-import { startlocal } from '@/utils/authSession'
 
 type AuthType = 'signIn' | 'signUp'
 

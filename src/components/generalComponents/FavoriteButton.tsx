@@ -1,5 +1,5 @@
 'use client'
-import useFavoriteStore from '@/storage/storage'
+import useFavoriteStore from '@/storage/FavoriteStorage'
 import notify from '@/utils/notify'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -10,10 +10,10 @@ function FavoriteButton({ id }: { id: number }) {
 
   const toggleFavorite = (id: number) => {
     if (favoriteIds.includes(id)) {
-		removeFavorite(id)
+      removeFavorite(id)
       notify.itemDeleted()
     } else {
-		addFavorite(id)
+      addFavorite(id)
       notify.itemAdded()
     }
   }

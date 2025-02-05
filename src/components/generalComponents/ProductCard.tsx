@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import CardImage from './CardImage'
 import Product from '@/types/product'
-import useFavoriteStore from '@/storage/storage'
+import useFavoriteStore from '@/storage/FavoriteStorage'
 
 function ProductCard({ product }: { product: Product }) {
   console.log('product', product)
