@@ -1,10 +1,34 @@
+'use client'
 import clsx from 'clsx'
 import CardImage from './CardImage'
 import Product from '@/types/product'
 import useFavoriteStore from '@/storage/FavoriteStorage'
+import addPurchase from '@/utils/addProduct'
+import { getAuth } from 'firebase/auth'
+import { auth, db } from '@/lib/fireBase'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { log } from 'node:console'
+import addProduct from '@/utils/addProduct'
 
 function ProductCard({ product }: { product: Product }) {
-  console.log('product', product)
+  const auth = getAuth()
+  const currentUser = auth.currentUser
+  const [error, setError] = useState<string | null>(null)
+  const handleBuyClick = async () => {
+    if (currentUser) {
+      try {
+        // Сохраняем покупку в Firestore
+        await addProduct(product, currentUser.uid)
+      } catch (err) {
+        setError('Ошибка при добавлении покупки. Попробуйте снова.')
+        console.error('Ошибка при добавлении покупки:', err)
+      } finally {
+      }
+    } else {
+      setError('Пользователь не авторизован.')
+    }
+  }
 
   return (
     <div className="card bg-base-100 max-h-[568px] border-2 rounded-md shadow-xl">
@@ -40,6 +64,7 @@ function ProductCard({ product }: { product: Product }) {
           </p>
         )}
         <button
+          onClick={handleBuyClick}
           className={clsx(
             'btn btn-outline',
             product.oldPrice && 'border-orange-300',
@@ -48,9 +73,9 @@ function ProductCard({ product }: { product: Product }) {
         >
           Купить
         </button>
+        <p>{error}</p>
       </div>
     </div>
   )
 }
-
 export default ProductCard

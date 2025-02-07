@@ -47,8 +47,6 @@ import { User } from 'firebase/auth'
 // }
 const renderTabContent = (tab: string, user: User | null) => {
   switch (tab) {
-    case 'info':
-      return <PersonalInfoTab user={user} />
     case 'orders':
       return <OrdersTab />
     case 'favorites':

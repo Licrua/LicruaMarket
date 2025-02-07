@@ -6,7 +6,7 @@ import renderTabContent from '@/utils/tabContent'
 // import renderConte
 
 const tabs = [
-  { id: 'info', label: 'Личная информация' },
+//   { id: 'info', label: 'Личная информация' },
   { id: 'orders', label: 'История заказов' },
   { id: 'favorites', label: 'Избранное' },
   { id: 'settings', label: 'Настройки' },

@@ -13,7 +13,7 @@ const Avatar = () => {
   useEffect(() => {
     // Устанавливаем наблюдателя
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-		console.log('auth', auth);
+		console.log('auth', auth.currentUser);
 		console.log('user', user);
       setUser(user) // Обновляем состояние, когда пользователь аутентифицируется или выходит
     })

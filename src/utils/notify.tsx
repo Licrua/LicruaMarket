@@ -38,6 +38,16 @@ const notify = {
       </div>,
       { autoClose: 3000 }
     ),
+	addProduct: () =>
+		toast(
+		  <div className="bg-green-300 p-3 rounded-lg">
+			<p style={{ color: 'purple', margin: 0 }}>Товар добавлен в корзину</p>
+			<Link href="/cart">
+          <p className="underline">Перейти в корзину?</p>
+        </Link>
+		  </div>,
+		  { autoClose: 3000 }
+		),
 }
 
 export default notify
