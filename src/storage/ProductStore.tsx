@@ -21,12 +21,16 @@ type ProductStore = {
   fetchProducts: () => () => void
   addProduct: (product: cardProduct, userId: string) => Promise<void>
   removeProduct: (productId: string) => Promise<void>
+  setStatus: (status: string) => void
   removeAllProducts: () => Promise<void>
+  status: string
 }
 
 export const useProductStore = create<ProductStore>((set) => ({
   products: [],
+  status: 'registered',
   loading: false,
+  setStatus: (status) => set({ status }),
   fetchProducts: () => {
     set({ loading: true })
     const unsubscribe = onSnapshot(
@@ -61,6 +65,7 @@ export const useProductStore = create<ProductStore>((set) => ({
         createdAt: new Date().toISOString(),
       })
       console.log('Продукт успешно добавлен')
+      console.log('doc', doc)
     } catch (error) {
       console.error('Ошибка при добавлении продукта:', error)
       throw new Error('Не удалось сохранить продукт.')

@@ -15,7 +15,8 @@ const useAuthStore = create<AuthState>((set) => ({
 
 // Инициализация слушателя авторизации
 export const initAuthListener = () => {
-  const auth = getAuth() 
+  const auth = getAuth()
+  console.log('auth', auth)
   onAuthStateChanged(auth, (user) => {
     useAuthStore.getState().setUser(user) // Обновляем состояние в store
   })

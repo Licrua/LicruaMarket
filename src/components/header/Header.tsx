@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 
 const Header = () => {
   const products = useProductStore((state) => state.products)
-
+  console.log('products', products)
 
   return (
     <header>

@@ -1,28 +1,28 @@
 'use client'
 
 import PurchaseProccess from '@/components/generalComponents/PurchaseProccess'
-import { useCartStore } from '@/storage/CartStore'
+import useAuthStore from '@/storage/AuthState'
+// import { useCartStore } from '@/storage/CartStore'
 import { useProductStore } from '@/storage/ProductStore'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useMemo } from 'react'
 
 const CartPage = () => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
-
-  const {
-    cartItems,
-    totalAmount,
-    increaseQuantity,
-    decreaseQuantity,
-    clearCart,
-  } = useCartStore()
+  const { currentUser } = useAuthStore()
+  const summPrice = useMemo(() => {
+    return products.reduce((acc, item) => acc + item.productPrice, 0)
+  }, [products])
+  console.log('summPrice', summPrice)
+  console.log('currentUser', currentUser)
 
   return (
     <div className="container mx-auto p-4 sm:p-10">
       <PurchaseProccess />
       <h1 className="text-2xl text-center font-bold mb-6 sm:mb-8">Корзина</h1>
-      {products.length === 0 ? (
+      {products.length === 0  ? (
         <div className="text-center">
           <p className="text-gray-500 mb-4">Ваша корзина пуста.</p>
           <button
@@ -53,14 +53,14 @@ const CartPage = () => {
                 </div>
                 <div className="flex  items-center gap-2 sm:gap-4">
                   <button
-                    onClick={() => decreaseQuantity(item.id)}
+                    // onClick={() => decreaseQuantity(item.id)}
                     className="btn btn-sm btn-circle"
                   >
                     -
                   </button>
                   <span className="font-medium">{item.quantity}</span>
                   <button
-                    onClick={() => increaseQuantity(item.id)}
+                    // onClick={() => increaseQuantity(item.id)}
                     className="btn btn-sm btn-circle"
                   >
                     +
@@ -75,7 +75,7 @@ const CartPage = () => {
 
           <div className="flex justify-between flex-col sm:flex-row items-center mb-5">
             <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-0">
-              Итого: ₽ {totalAmount}
+              Итого: ₽ {summPrice}
             </h2>
             {/* <Image src={'/licruaCard.png'} alt="dads" fill className='w-[15px]' /> */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
