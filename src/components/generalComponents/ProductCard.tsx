@@ -10,16 +10,22 @@ import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { log } from 'node:console'
 import addProduct from '@/utils/addProduct'
+import useAuthStore from '@/storage/AuthState'
+import notify from '@/utils/notify'
+import cardProduct from '@/types/cardProduct'
 
-function ProductCard({ product }: { product: Product }) {
-  const auth = getAuth()
-  const currentUser = auth.currentUser
+function ProductCard({ product }: { product: cardProduct }) {
+  const currentUser = useAuthStore((state) => state.currentUser)
   const [error, setError] = useState<string | null>(null)
+  const [isPending, setPending] = useState(false)
+
   const handleBuyClick = async () => {
     if (currentUser) {
+      setPending(true)
       try {
-        // Сохраняем покупку в Firestore
         await addProduct(product, currentUser.uid)
+        notify.addProduct()
+        setPending(false)
       } catch (err) {
         setError('Ошибка при добавлении покупки. Попробуйте снова.')
         console.error('Ошибка при добавлении покупки:', err)
@@ -64,6 +70,7 @@ function ProductCard({ product }: { product: Product }) {
           </p>
         )}
         <button
+          disabled={isPending}
           onClick={handleBuyClick}
           className={clsx(
             'btn btn-outline',

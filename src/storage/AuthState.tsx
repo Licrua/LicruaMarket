@@ -1,13 +1,24 @@
-// stores/useAuthStore.ts
+// store/authStore.ts
+// import create from 'zustand'
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
 import { create } from 'zustand'
-import { User } from 'firebase/auth'
 
-type AuthState = {
+interface AuthState {
   currentUser: User | null
-  setCurrentUser: (user: User | null) => void
+  setUser: (user: User | null) => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+const useAuthStore = create<AuthState>((set) => ({
   currentUser: null,
-  setCurrentUser: (user) => set({ currentUser: user }),
+  setUser: (user) => set({ currentUser: user }),
 }))
+
+// Инициализация слушателя авторизации
+export const initAuthListener = () => {
+  const auth = getAuth() 
+  onAuthStateChanged(auth, (user) => {
+    useAuthStore.getState().setUser(user) // Обновляем состояние в store
+  })
+}
+
+export default useAuthStore

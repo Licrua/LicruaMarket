@@ -1,10 +1,27 @@
 import { db } from '@/lib/fireBase'
+import { useProductStore } from '@/storage/ProductStore'
 import cardProduct from '@/types/cardProduct'
 import Product from '@/types/product'
+// import Product from '@/types/product'
 import { collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 
-const HeaderCart = async ({ prods }: { prods: any }) => {
-  console.log('prods', prods)
+const HeaderCart = ({ products }: { products: Product[] }) => {
+  console.log('products', products)
+
+  //   const { products } = useProductStore()
+  //   const products = useProductStore((state) => state.products)
+  //   const { products, loading, fetchProducts } = useProductStore();
+  //   console.log('prrsdiuahsidgasiud', products);
+
+  //   useEffect(() => {
+  //     const unsubscribe = fetchProducts()
+  //     return () => unsubscribe() // Отписываемся, когда компонент размонтируется
+  //   }, [])
+
+  //   useEffect(() => {
+  //     fetchProducts()
+  //   }, [fetchProducts])
 
   return (
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -23,7 +40,7 @@ const HeaderCart = async ({ prods }: { prods: any }) => {
             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
           />
         </svg>
-        <span className="badge badge-sm indicator-item">{prods.length}</span>
+        <span className="badge badge-sm indicator-item">{products.length}</span>
       </div>
     </div>
   )

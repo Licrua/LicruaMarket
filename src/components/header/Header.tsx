@@ -1,3 +1,4 @@
+'use client'
 import HeaderLogo from './HeaderLogo'
 import HeaderCart from './HeaderCart'
 import HeaderCartDetails from './HeaderCartDetails'
@@ -8,14 +9,12 @@ import HeaderNovbar from './HeaderNovbar'
 import HeaderMenu from './HeaderMenu'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/lib/fireBase'
+import { useProductStore } from '@/storage/ProductStore'
+import { useEffect } from 'react'
 
-const Header = async () => {
-  const querySnapshot = await getDocs(collection(db, 'product'))
-  const product = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }))
-  console.log('product', product)
+const Header = () => {
+  const products = useProductStore((state) => state.products)
+
 
   return (
     <header>
@@ -24,8 +23,8 @@ const Header = async () => {
         <HeaderMenu />
         <HeaderFrame>
           <HeaderDropDown>
-            <HeaderCart prods={product} />
-            <HeaderCartDetails prods={product} />
+            <HeaderCart products={products} />
+            <HeaderCartDetails products={products} />
           </HeaderDropDown>
           <Avatar />
         </HeaderFrame>

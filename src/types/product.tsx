@@ -1,9 +1,12 @@
 type Product = {
-  id: number
-  name: string
-  currentPrice: number
-  image: string
-  category: string
-  oldPrice?: number
+  id: string
+  productId: string
+  productName: string
+  productPrice: number
+  productOldPrice?: number
+  productCategory: string
+  productImage: string
+  userId: string
+  createdAt: string
 }
 export default Product
