@@ -13,9 +13,11 @@ import addProduct from '@/utils/addProduct'
 import useAuthStore from '@/storage/AuthState'
 import notify from '@/utils/notify'
 import cardProduct from '@/types/cardProduct'
+import { useProductStore } from '@/storage/ProductStore'
 
 function ProductCard({ product }: { product: cardProduct }) {
   const currentUser = useAuthStore((state) => state.currentUser)
+  const { addProduct } = useProductStore()
   const [error, setError] = useState<string | null>(null)
   const [isPending, setPending] = useState(false)
 

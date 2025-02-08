@@ -9,19 +9,7 @@ import { useEffect, useState } from 'react'
 const HeaderCart = ({ products }: { products: Product[] }) => {
   console.log('products', products)
 
-  //   const { products } = useProductStore()
-  //   const products = useProductStore((state) => state.products)
-  //   const { products, loading, fetchProducts } = useProductStore();
-  //   console.log('prrsdiuahsidgasiud', products);
 
-  //   useEffect(() => {
-  //     const unsubscribe = fetchProducts()
-  //     return () => unsubscribe() // Отписываемся, когда компонент размонтируется
-  //   }, [])
-
-  //   useEffect(() => {
-  //     fetchProducts()
-  //   }, [fetchProducts])
 
   return (
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
