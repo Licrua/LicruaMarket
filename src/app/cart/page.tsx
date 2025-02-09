@@ -1,6 +1,7 @@
 'use client'
 
 import PurchaseProccess from '@/components/generalComponents/PurchaseProccess'
+import { useCartSummary } from '@/hooks/useCartSummary'
 import useAuthStore from '@/storage/AuthState'
 // import { useCartStore } from '@/storage/CartStore'
 import { useProductStore } from '@/storage/ProductStore'
@@ -11,12 +12,8 @@ import { useEffect, useMemo } from 'react'
 const CartPage = () => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
-  const { currentUser } = useAuthStore()
   const { setStatus, incrementProduct, decrementProduct } = useProductStore()
-  const summPrice = useMemo(() => {
-    return products.reduce((acc, item) => acc + item.productPrice, 0)
-  }, [products])
-
+  const { cartTotalSumm } = useCartSummary()
   useEffect(() => {
     setStatus('selectedProducts')
   }, [])
@@ -81,7 +78,7 @@ const CartPage = () => {
 
           <div className="flex justify-between flex-col sm:flex-row items-center mb-5">
             <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-0">
-              Итого: ₽ {summPrice}
+              Итого: ₽ {cartTotalSumm}
             </h2>
             {/* <Image src={'/licruaCard.png'} alt="dads" fill className='w-[15px]' /> */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
@@ -92,9 +89,12 @@ const CartPage = () => {
                 Очистить корзину
               </button>
               <button
-                onClick={() =>
-                  products.length > 1 ? router.push('/checkout') : router.push('')
-                }
+                onClick={() => {
+                  if (products.length > 1) {
+                    router.push('/checkout')
+                  }
+                }}
+                disabled={products.length < 1}
                 className="btn btn-success w-full sm:w-auto"
               >
                 Оформить заказ
