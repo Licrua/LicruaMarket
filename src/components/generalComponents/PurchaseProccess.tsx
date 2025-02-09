@@ -14,8 +14,8 @@ export function PurchaseProccess() {
   }
 
   return (
-    <div className="text-center">
-      <ul className="steps items-center gap-3 mb-10 steps-horizontal">
+    <div className="md:text-center">
+      <ul className="steps md:items-center md:gap-3 md:mb-10 steps-vertical sm:steps-horizontal">
         {steps.map((step) => (
           <li key={step.id} className={getStepClass(step.id)}>
             {step.label}

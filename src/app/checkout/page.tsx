@@ -7,16 +7,7 @@ import React, { useEffect } from 'react'
 const CheckoutPage = () => {
   const { setStatus, products } = useProductStore()
   const { cartTotalSumm } = useCartSummary()
-  //   const orders = [
-  //     { id: 1, name: 'Пицца Маргарита', quantity: 2, price: 500 },
-  //     { id: 2, name: 'Суши-сет "Филадельфия"', quantity: 1, price: 1200 },
-  //     { id: 3, name: 'Кока-Кола 1л', quantity: 3, price: 150 },
-  //   ]
 
-  //   const total = orders.reduce(
-  //     (sum, item) => sum + item.price * item.quantity,
-  //     0
-  //   )
   useEffect(() => {
     setStatus('paid')
   }, [])
@@ -27,13 +18,13 @@ const CheckoutPage = () => {
         {/* Левая колонка - список заказов */}
         <div className="lg:w-2/3 bg-base-100 shadow-lg rounded-lg p-4">
           <h2 className="text-xl font-bold mb-4">Ваши заказы</h2>
-          <ul className="space-y-3">
+          <ul className="space-y-3 overflow-scroll h-52">
             {products.map((prod) => (
               <li
                 key={prod.id}
                 className="flex justify-between items-center bg-base-200 p-3 rounded-lg"
               >
-                <img src={prod.productImage} className='w-20 rounded' alt="prod" />
+                <img src={prod.productImage} className='w-20 me-2 sm:me-0 rounded' alt="prod" />
                 <div>
                   <h3 className="font-medium">{prod.productName}</h3>
                   <p className="text-sm text-gray-500">
