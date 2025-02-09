@@ -6,23 +6,26 @@ import useAuthStore from '@/storage/AuthState'
 import { useProductStore } from '@/storage/ProductStore'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 const CartPage = () => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
   const { currentUser } = useAuthStore()
+  const { setStatus } = useProductStore()
   const summPrice = useMemo(() => {
     return products.reduce((acc, item) => acc + item.productPrice, 0)
   }, [products])
-  console.log('summPrice', summPrice)
-  console.log('currentUser', currentUser)
+
+  useEffect(() => {
+	setStatus('selectedProducts')
+  },[])
 
   return (
     <div className="container mx-auto p-4 sm:p-10">
       <PurchaseProccess />
       <h1 className="text-2xl text-center font-bold mb-6 sm:mb-8">Корзина</h1>
-      {products.length === 0  ? (
+      {products.length === 0 ? (
         <div className="text-center">
           <p className="text-gray-500 mb-4">Ваша корзина пуста.</p>
           <button

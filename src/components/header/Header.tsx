@@ -11,9 +11,11 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/lib/fireBase'
 import { useProductStore } from '@/storage/ProductStore'
 import { useEffect } from 'react'
+import useAuthStore from '@/storage/AuthState'
 
 const Header = () => {
   const products = useProductStore((state) => state.products)
+  const { currentUser } = useAuthStore()
   console.log('products', products)
 
   return (
@@ -23,7 +25,7 @@ const Header = () => {
         <HeaderMenu />
         <HeaderFrame>
           <HeaderDropDown>
-            <HeaderCart products={products} />
+            {currentUser && <HeaderCart products={products} />}
             <HeaderCartDetails products={products} />
           </HeaderDropDown>
           <Avatar />

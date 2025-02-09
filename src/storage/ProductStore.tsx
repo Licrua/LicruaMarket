@@ -18,28 +18,33 @@ type Product = {
 type ProductStore = {
   products: Product[]
   loading: boolean
-  fetchProducts: () => () => void
+  fetchProducts: (userId: string) => () => void;
   addProduct: (product: cardProduct, userId: string) => Promise<void>
   removeProduct: (productId: string) => Promise<void>
   setStatus: (status: string) => void
-  removeAllProducts: () => Promise<void>
+  removeAllProducts: (userId: string) => Promise<void>;
   status: string
 }
+
 
 export const useProductStore = create<ProductStore>((set) => ({
   products: [],
   status: 'registered',
   loading: false,
   setStatus: (status) => set({ status }),
-  fetchProducts: () => {
+
+  fetchProducts: (userId: string) => {
     set({ loading: true })
     const unsubscribe = onSnapshot(
       collection(db, 'product'),
       (snapshot) => {
-        const fetchedProducts = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
+        const fetchedProducts = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((product) => product.userId === userId) // Фильтруем продукты по userId
+
         set({ products: fetchedProducts, loading: false })
       },
       (error) => {
@@ -48,36 +53,34 @@ export const useProductStore = create<ProductStore>((set) => ({
       }
     )
 
-    // Вернём функцию для отключения подписки, если нужно
     return unsubscribe
   },
 
   addProduct: async (product: cardProduct, userId: string) => {
     try {
       await addDoc(collection(db, 'product'), {
-        userId,
-        productId: product?.id,
-        productName: product?.name,
-        productOldPrice: product?.oldPrice || null,
-        productImage: product?.image,
-        productPrice: product?.currentPrice,
-        productCategory: product?.category,
+        userId, // Привязываем продукт к конкретному пользователю
+        productId: product.id,
+        productName: product.name,
+        productOldPrice: product.oldPrice || null,
+        productImage: product.image,
+        productPrice: product.currentPrice,
+        productCategory: product.category,
         createdAt: new Date().toISOString(),
       })
       console.log('Продукт успешно добавлен')
-      console.log('doc', doc)
     } catch (error) {
       console.error('Ошибка при добавлении продукта:', error)
       throw new Error('Не удалось сохранить продукт.')
     }
   },
+
   removeProduct: async (productId) => {
     try {
       const productDoc = doc(db, 'product', productId)
-      await deleteDoc(productDoc) // Удаление из Firestore
+      await deleteDoc(productDoc)
       console.log('Продукт успешно удалён')
 
-      // Обновляем состояние в store
       set((state) => ({
         products: state.products.filter((product) => product.id !== productId),
       }))
@@ -86,22 +89,18 @@ export const useProductStore = create<ProductStore>((set) => ({
       throw new Error('Не удалось удалить продукт.')
     }
   },
-  removeAllProducts: async () => {
+
+  removeAllProducts: async (userId: string) => {
     try {
       const productsSnapshot = await getDocs(collection(db, 'product'))
-      console.log('productsSnapshot', productsSnapshot)
+      const deletePromises = productsSnapshot.docs
+        .filter((doc) => doc.data().userId === userId) // Удаляем только продукты этого пользователя
+        .map((doc) => deleteDoc(doc.ref))
 
-      const deletePromises = productsSnapshot.docs.map((doc) =>
-        deleteDoc(doc.ref)
-      )
-      console.log('deletePromises', deletePromises)
+      await Promise.all(deletePromises)
+      console.log('Все продукты пользователя успешно удалены')
 
-      await Promise.all(deletePromises) // Ожидаем удаления всех продуктов
-
-      console.log('Все продукты успешно удалены')
-
-      // Обновляем состояние в store
-      set({ products: [] }) // Очищаем список продуктов в Zustand
+      set({ products: [] })
     } catch (error) {
       console.error('Ошибка при удалении всех продуктов:', error)
       throw new Error('Не удалось удалить все продукты.')

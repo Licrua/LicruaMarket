@@ -6,8 +6,11 @@ import Container from '@/components/generalComponents/Container'
 import Header from '@/components/header/Header'
 import ToastProvider from '@/components/generalComponents/ToastProvider'
 import { useEffect } from 'react'
-import { initAuthListener } from '@/storage/AuthState'
+import useAuthStore, { initAuthListener } from '@/storage/AuthState'
 import { useProductStore } from '@/storage/ProductStore'
+import { useAuth } from '@/hooks/useAuth'
+import { auth } from '@/lib/fireBase'
+import { getAuth } from 'firebase/auth'
 // import { initializeAuthListener } from '@/storage/AuthStorage'
 
 // export const metadata: Metadata = {
@@ -20,11 +23,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const fetchProducts = useProductStore((state) => state.fetchProducts)
+  const currentUser = useAuthStore((state) => state.currentUser)
+
   useEffect(() => {
-    initAuthListener()
-    const unsubscribe = fetchProducts() // Подписываемся на изменения в продуктах
-    return () => unsubscribe()
-  }, [])
+    initAuthListener() // Инициализация слушателя авторизации
+
+    if (currentUser) {
+      const unsubscribe = fetchProducts(currentUser.uid) // Передаём userId в fetchProducts
+      return () => unsubscribe() // Отписываемся при размонтировании
+    }
+  }, [currentUser, fetchProducts])
 
   return (
     <html suppressHydrationWarning lang="en">
