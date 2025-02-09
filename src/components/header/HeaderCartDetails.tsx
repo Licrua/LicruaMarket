@@ -1,15 +1,13 @@
 'use client'
+import { useCartSummary } from '@/hooks/useCartSummary'
 import cardProduct from '@/types/cardProduct'
 import Product from '@/types/product'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useMemo } from 'react'
 
-function HeaderCartDetails({ cartLength }: { cartLength: number }) {
-//   const summ = useMemo(() => {
-//     return products.reduce((prev, cur) => prev + (cur.productPrice || 0), 0)
-//   }, [products])
-
+function HeaderCartDetails() {
+  const { cartLength, cartTotalSumm } = useCartSummary()
   return (
     <div
       tabIndex={0}
@@ -19,7 +17,7 @@ function HeaderCartDetails({ cartLength }: { cartLength: number }) {
         <span className="text-lg font-bold">
           В корзине {cartLength} позиций
         </span>
-        <span className="text-info">сумма: {summ} ₽ </span>
+        <span className="text-info">сумма: {cartTotalSumm} ₽ </span>
         <div className="card-actions">
           <button
             onClick={() => redirect('/cart')}

@@ -1,16 +1,8 @@
-import { db } from '@/lib/fireBase'
-import { useProductStore } from '@/storage/ProductStore'
-import cardProduct from '@/types/cardProduct'
-import Product from '@/types/product'
-// import Product from '@/types/product'
-import { collection, getDocs } from 'firebase/firestore'
-import { useEffect, useMemo, useState } from 'react'
+import { useCartSummary } from '@/hooks/useCartSummary'
 
-const HeaderCart = ({ products }: { products: Product[] }) => {
-  const cartLength = useMemo(
-    () => products.reduce((acc, item) => acc + item.quantity, 0),
-    [products]
-  )
+
+const HeaderCart = () => {
+  const { cartLength } = useCartSummary()
 
   return (
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

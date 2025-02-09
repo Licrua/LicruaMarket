@@ -14,14 +14,9 @@ import { useEffect, useMemo } from 'react'
 import useAuthStore from '@/storage/AuthState'
 
 const Header = () => {
-  const products = useProductStore((state) => state.products)
   const { currentUser } = useAuthStore()
-  //   console.log('productsSSSS', products.quantity)
-  const cartLength = useMemo(
-    () => products.reduce((acc, item) => acc + item.quantity, 0),
-    [products]
-  )
 
+ 
   return (
     <header>
       <HeaderNovbar>
@@ -29,8 +24,8 @@ const Header = () => {
         <HeaderMenu />
         <HeaderFrame>
           <HeaderDropDown>
-            {currentUser && <HeaderCart products={products} />}
-            <HeaderCartDetails cartLength={cartLength} />
+            {currentUser && <HeaderCart />}
+            <HeaderCartDetails />
           </HeaderDropDown>
           <Avatar />
         </HeaderFrame>
