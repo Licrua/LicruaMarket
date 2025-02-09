@@ -10,13 +10,17 @@ import HeaderMenu from './HeaderMenu'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/lib/fireBase'
 import { useProductStore } from '@/storage/ProductStore'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import useAuthStore from '@/storage/AuthState'
 
 const Header = () => {
   const products = useProductStore((state) => state.products)
   const { currentUser } = useAuthStore()
-  console.log('products', products)
+  //   console.log('productsSSSS', products.quantity)
+  const cartLength = useMemo(
+    () => products.reduce((acc, item) => acc + item.quantity, 0),
+    [products]
+  )
 
   return (
     <header>
@@ -26,7 +30,7 @@ const Header = () => {
         <HeaderFrame>
           <HeaderDropDown>
             {currentUser && <HeaderCart products={products} />}
-            <HeaderCartDetails products={products} />
+            <HeaderCartDetails cartLength={cartLength} />
           </HeaderDropDown>
           <Avatar />
         </HeaderFrame>

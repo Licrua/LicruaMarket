@@ -7,6 +7,7 @@ type Product = {
   productCategory: string
   productImage: string
   userId: string
+  quantity: number
   createdAt: string
 }
 export default Product

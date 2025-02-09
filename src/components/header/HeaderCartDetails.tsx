@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useMemo } from 'react'
 
-function HeaderCartDetails({ products }: { products: Product[] }) {
-  const summ = useMemo(() => {
-    return products.reduce((prev, cur) => prev + (cur.productPrice || 0), 0)
-  }, [products])
+function HeaderCartDetails({ cartLength }: { cartLength: number }) {
+//   const summ = useMemo(() => {
+//     return products.reduce((prev, cur) => prev + (cur.productPrice || 0), 0)
+//   }, [products])
 
   return (
     <div
@@ -17,7 +17,7 @@ function HeaderCartDetails({ products }: { products: Product[] }) {
     >
       <div className="card-body">
         <span className="text-lg font-bold">
-          В корзине {products.length} позиций
+          В корзине {cartLength} позиций
         </span>
         <span className="text-info">сумма: {summ} ₽ </span>
         <div className="card-actions">

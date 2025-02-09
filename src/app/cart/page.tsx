@@ -12,14 +12,14 @@ const CartPage = () => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
   const { currentUser } = useAuthStore()
-  const { setStatus } = useProductStore()
+  const { setStatus, incrementProduct, decrementProduct } = useProductStore()
   const summPrice = useMemo(() => {
     return products.reduce((acc, item) => acc + item.productPrice, 0)
   }, [products])
 
   useEffect(() => {
-	setStatus('selectedProducts')
-  },[])
+    setStatus('selectedProducts')
+  }, [])
 
   return (
     <div className="container mx-auto p-4 sm:p-10">
@@ -52,26 +52,29 @@ const CartPage = () => {
                   <h3 className="text-lg sm:text-xl font-semibold">
                     {item.productName}
                   </h3>
-                  <p className="text-gray-600">₽{item.productPrice}</p>
+                  <p className="text-gray-600">
+                    ₽{item.productPrice * item.quantity}
+                  </p>
                 </div>
                 <div className="flex  items-center gap-2 sm:gap-4">
                   <button
-                    // onClick={() => decreaseQuantity(item.id)}
+                    onClick={() =>
+                      decrementProduct(item.productId, item.userId)
+                    }
                     className="btn btn-sm btn-circle"
                   >
                     -
                   </button>
                   <span className="font-medium">{item.quantity}</span>
                   <button
-                    // onClick={() => increaseQuantity(item.id)}
+                    onClick={() =>
+                      incrementProduct(item.productId, item.userId)
+                    }
                     className="btn btn-sm btn-circle"
                   >
                     +
                   </button>
                 </div>
-                <p className="font-semibold text-right sm:text-left sm:w-32">
-                  ₽{item.productPrice * item.quantity}
-                </p>
               </div>
             ))}
           </div>
@@ -88,7 +91,12 @@ const CartPage = () => {
               >
                 Очистить корзину
               </button>
-              <button className="btn btn-success w-full sm:w-auto">
+              <button
+                onClick={() =>
+                  products.length > 1 ? router.push('/checkout') : router.push('')
+                }
+                className="btn btn-success w-full sm:w-auto"
+              >
                 Оформить заказ
               </button>
             </div>

@@ -4,12 +4,13 @@ import cardProduct from '@/types/cardProduct'
 import Product from '@/types/product'
 // import Product from '@/types/product'
 import { collection, getDocs } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 const HeaderCart = ({ products }: { products: Product[] }) => {
-  console.log('products', products)
-
-
+  const cartLength = useMemo(
+    () => products.reduce((acc, item) => acc + item.quantity, 0),
+    [products]
+  )
 
   return (
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -28,7 +29,7 @@ const HeaderCart = ({ products }: { products: Product[] }) => {
             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
           />
         </svg>
-        <span className="badge badge-sm indicator-item">{products.length}</span>
+        <span className="badge badge-sm indicator-item">{cartLength}</span>
       </div>
     </div>
   )
