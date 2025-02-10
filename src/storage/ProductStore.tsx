@@ -23,7 +23,7 @@ type ProductStore = {
   setStatus: (status: string) => void
   incrementProduct: (productId: string, userId: string) => Promise<void>
   decrementProduct: (productId: string, userId: string) => Promise<void>
-  removeAllProducts: (userId: string) => Promise<void>
+  removeAllProducts: (userId: string | undefined) => Promise<void>
   status: string
 }
 
@@ -63,8 +63,8 @@ export const useProductStore = create<ProductStore>((set) => ({
       const productSnapshot = await getDocs(productQuery)
       if (!productSnapshot.empty) {
         const productRef = productSnapshot.docs[0].ref
-		console.log('calculateTotals', productRef);
-		
+        console.log('calculateTotals', productRef)
+
         const currentQuantity = productSnapshot.docs[0].data().quantity
         await updateDoc(productRef, { quantity: currentQuantity + 1 })
       }
@@ -146,25 +146,32 @@ export const useProductStore = create<ProductStore>((set) => ({
       throw new Error('Не удалось удалить продукт.')
     }
   },
-
   removeAllProducts: async (userId: string) => {
     try {
-      const productsSnapshot = await getDocs(collection(db, 'product'))
-      const deletePromises = productsSnapshot.docs
-        .filter((doc) => doc.data().userId === userId)
-        .map((doc) => deleteDoc(doc.ref))
+      const productsQuery = query(
+        collection(db, 'product'),
+        where('userId', '==', userId)
+      )
+      const productsSnapshot = await getDocs(productsQuery)
+
+      if (productsSnapshot.empty) {
+        console.log('Нет продуктов для удаления')
+        return
+      }
+
+      const deletePromises = productsSnapshot.docs.map((doc) =>
+        deleteDoc(doc.ref)
+      )
       await Promise.all(deletePromises)
+
       console.log('Все продукты пользователя успешно удалены')
-      set({ products: [] })
+      set({ products: [] }) // Обновить состояние
     } catch (error) {
       console.error('Ошибка при удалении всех продуктов:', error)
       throw new Error('Не удалось удалить все продукты.')
     }
   },
 }))
-
-
-
 
 // import { create } from 'zustand'
 // import {
@@ -248,7 +255,7 @@ export const useProductStore = create<ProductStore>((set) => ({
 //         const productRef = productSnapshot.docs[0].ref
 //         const currentQuantity = productSnapshot.docs[0].data().quantity
 //         await updateDoc(productRef, { quantity: currentQuantity + 1 })
-        
+
 //         // Обновляем локальные данные
 //         set((state) => {
 //           const updatedProducts = state.products.map((product) =>

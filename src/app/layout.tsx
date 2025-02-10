@@ -27,7 +27,6 @@ export default function RootLayout({
 
   useEffect(() => {
     initAuthListener() // Инициализация слушателя авторизации
-
     if (currentUser) {
       const unsubscribe = fetchProducts(currentUser.uid) // Передаём userId в fetchProducts
       return () => unsubscribe() // Отписываемся при размонтировании

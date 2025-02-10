@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { useProductStore } from '@/storage/ProductStore'
+import useAuthStore from '@/storage/AuthState'
 
 interface CartSummaryProps {
   cartTotalSumm: number
@@ -8,6 +9,7 @@ interface CartSummaryProps {
 const CartSummary: React.FC<CartSummaryProps> = ({ cartTotalSumm }) => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
+  const currentUser = useAuthStore((state) => state.currentUser)
 
   return (
     <div className="flex justify-between flex-col sm:flex-row items-center mb-5">
@@ -17,7 +19,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartTotalSumm }) => {
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
         <button
           className="btn btn-error w-full sm:w-auto"
-          onClick={removeAllProducts}
+          onClick={() => removeAllProducts(currentUser?.uid)}
         >
           Очистить корзину
         </button>

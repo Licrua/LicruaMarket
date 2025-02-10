@@ -14,7 +14,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       <img
         src={item.productImage}
         alt={item.productName}
-        className="max-w-[200px]"
+        className="max-w-[200px] rounded shadow-lg shadow-black"
       />
       <div className="flex-1 text-center">
         <h3 className="text-lg sm:text-xl font-semibold">{item.productName}</h3>
