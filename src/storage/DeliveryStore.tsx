@@ -10,8 +10,8 @@ interface DeliveryStore {
 }
 
 export const useDeliveryStore = create<DeliveryStore>((set) => ({
-  deliveryMethod: null,
-  pickupLocation: '',
+  deliveryMethod: 'pickup',
+  pickupLocation: 'Ростов-на-Дону, Мечникова 77Б',
   setDeliveryMethod: (method) => set({ deliveryMethod: method }),
   setPickupLocation: (location) => set({ pickupLocation: location }),
 }))

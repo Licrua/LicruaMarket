@@ -5,12 +5,13 @@ import ProductCard from '../generalComponents/ProductCard'
 
 async function MainLeaderCards() {
   const res = await fetch(
-    'https://run.mocky.io/v3/ada7ea4f-0a1d-4ef3-8dfc-84824b6a0e06'
+    'https://run.mocky.io/v3/e689e6a2-34d1-4299-a167-c45d633ae67c'
   )
 
   if (!res.ok) {
     throw Error('error')
   }
+
   const items: newProducts = await res.json()
 
   return (

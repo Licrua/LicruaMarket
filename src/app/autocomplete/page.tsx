@@ -37,7 +37,7 @@ export default function AddressAutocomplete() {
   }
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md  mx-auto">
       <label className="block text-gray-700 font-medium">Введите адрес</label>
       <input
         type="text"
@@ -47,11 +47,11 @@ export default function AddressAutocomplete() {
         placeholder="Начните вводить адрес..."
       />
       {isOpen && suggestions.length > 0 && (
-        <ul className="border rounded-md mt-2 bg-white">
+        <ul className="border  rounded-md mt-2 bg-white">
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
+              className="p-2  hover:bg-gray-100 cursor-pointer"
               onClick={() => handleSelectSuggestion(suggestion)} // Закрываем список при выборе
             >
               {suggestion}
