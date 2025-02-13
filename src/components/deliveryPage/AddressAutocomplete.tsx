@@ -44,7 +44,7 @@ const AddressAutocomplete = ({
   return (
     <div className="max-w-md mx-auto">
       <label className="block text-gray-700 font-medium">
-        Введите адрес доставки
+        Введите адрес доставки :
       </label>
       <input
         type="text"

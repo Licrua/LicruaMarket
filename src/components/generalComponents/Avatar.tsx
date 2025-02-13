@@ -7,21 +7,10 @@ import { useEffect, useState } from 'react'
 // import { auth } from '../../lib/fireBase'
 
 const Avatar = () => {
-//   const [user, setUser] = useState<User | null>(null)
+
   const { currentUser } = useAuthStore()
 
-//   console.log('user', user)
 
-//   useEffect(() => {
-//     // Устанавливаем наблюдателя
-//     const unsubscribe = onAuthStateChanged(auth, (user) => {
-//       console.log('auth', auth.currentUser)
-//       console.log('user', user)
-//       setUser(user) // Обновляем состояние, когда пользователь аутентифицируется или выходит
-//     })
-
-//     return () => unsubscribe() // Отписка при размонтировании
-//   }, [])
 
   const handleSignOut = async () => {
     const auth = getAuth()

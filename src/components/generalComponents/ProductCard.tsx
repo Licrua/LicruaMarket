@@ -74,7 +74,7 @@ function ProductCard({ product }: { product: cardProduct }) {
         >
           Купить
         </button>
-        <p>{error}</p>
+        {/* <p>{error}</p> */}
       </div>
     </div>
   )

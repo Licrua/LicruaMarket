@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import Link from 'next/link'
 
 const notify = {
+  productError: (text: string) => toast.error(text),
   itemAdded: () =>
     toast(
       <div className="bg-green-200 p-3 rounded-lg">
