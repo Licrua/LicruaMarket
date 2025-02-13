@@ -11,12 +11,11 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/lib/fireBase'
 import { useProductStore } from '@/storage/ProductStore'
 import { useEffect, useMemo } from 'react'
-import useAuthStore from '@/storage/AuthState'
+import useAuthStore from '@/storage/AuthStateStorage'
 
 const Header = () => {
   const { currentUser } = useAuthStore()
 
- 
   return (
     <header>
       <HeaderNovbar>

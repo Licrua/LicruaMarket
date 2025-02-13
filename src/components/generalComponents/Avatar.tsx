@@ -1,16 +1,13 @@
 'use client'
 import { auth } from '@/lib/fireBase'
-import useAuthStore from '@/storage/AuthState'
+import useAuthStore from '@/storage/AuthStateStorage'
 import { getAuth, onAuthStateChanged, signOut, User } from 'firebase/auth'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 // import { auth } from '../../lib/fireBase'
 
 const Avatar = () => {
-
   const { currentUser } = useAuthStore()
-
-
 
   const handleSignOut = async () => {
     const auth = getAuth()

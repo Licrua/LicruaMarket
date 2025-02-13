@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import CardImage from './CardImage'
 import { useState } from 'react'
-import useAuthStore from '@/storage/AuthState'
+import useAuthStore from '@/storage/AuthStateStorage'
 import notify from '@/utils/notify'
 import cardProduct from '@/types/cardProduct'
 import { useProductStore } from '@/storage/ProductStore'
@@ -22,11 +22,13 @@ function ProductCard({ product }: { product: cardProduct }) {
         setPending(false)
       } catch (err) {
         setError('Ошибка при добавлении покупки. Попробуйте снова.')
+        notify.productError(error)
         console.error('Ошибка при добавлении покупки:', err)
       } finally {
       }
     } else {
       setError('Пользователь не авторизован.')
+      notify.productError(error)
     }
   }
 
