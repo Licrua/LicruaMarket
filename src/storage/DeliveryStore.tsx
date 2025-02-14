@@ -29,14 +29,14 @@ export const useDeliveryStore = create<DeliveryStore>((set) => ({
     email: string
   ) => {
     const order: Order = {
-      orderId: `order_${Date.now()}`,
-      userId,
-      deliveryAddress:
-        deliveryMethod === 'courier' ? pickupLocation : 'Not applicable',
-      email: email, // Пример номера телефона
-      products: products, // Список продуктов
-      createdAt: new Date().toISOString(),
-    }
+		orderId: `#${Date.now()}`,
+		userId,
+		deliveryMethod,
+		pickupLocation,
+		email,
+		products,
+		createdAt: new Date().toISOString(),
+	  }
 
     try {
       const orderRef = collection(db, 'orders')

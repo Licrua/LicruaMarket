@@ -9,25 +9,28 @@ import CourierAddressInput from './CourierAddressInput'
 import PurchaseProccess from '../generalComponents/PurchaseProccess'
 import notify from '@/utils/notify'
 import useAuthStore from '@/storage/AuthStateStorage'
+import { useOrderStore } from '@/storage/OrderStorage'
+import { useRouter } from 'next/navigation'
 
 const Delivery = () => {
   const products = useProductStore((state) => state.products)
   const currentUser = useAuthStore((state) => state.currentUser)
-
-  console.log('productssss', products)
-  console.log('currentUser', currentUser)
-
+//   console.log('productssss', products)
+//   console.log('currentUser', currentUser)
   const {
     deliveryMethod,
     setDeliveryMethod,
     setPickupLocation,
     pickupLocation,
-    createOrder,
+    // createOrder,
   } = useDeliveryStore()
+  const { createOrder, fetchOrders } = useOrderStore()
+  const router = useRouter()
   const [deliveryAddress, setDeliveryAddress] = useState('')
   const { setStatus } = useProductStore()
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if (deliveryMethod === 'pickup' && !pickupLocation) {
       notify.productError('Укажите место самовывоза')
       return
@@ -36,19 +39,26 @@ const Delivery = () => {
       notify.productError('Укажите адрес для доставки курьером!')
       return
     }
-    createOrder(
-      currentUser?.uid,
+    await createOrder(
+      currentUser?.uid ?? '',
       products,
       deliveryMethod,
-      deliveryAddress,
-      pickupLocation
+	  deliveryAddress || pickupLocation,
+      currentUser?.email ?? ''
     )
+    fetchOrders(currentUser?.uid ?? '')
+    router.push('/order')
   }
 
   useEffect(() => {
     setStatus('received')
   }, [])
 
+  	console.log('pickupLocation', pickupLocation);
+  	console.log('deliveryAddress', deliveryAddress);
+
+	
+   
   return (
     <div className="mt-3">
       <PurchaseProccess />

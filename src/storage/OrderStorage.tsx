@@ -26,7 +26,7 @@ interface OrderStore {
 export const useOrderStore = create<OrderStore>((set) => ({
   orders: [],
   loading: false,
- 
+
   fetchOrders: (userId: string) => {
     set({ loading: true })
     const ordersQuery = query(
@@ -38,7 +38,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
       ordersQuery,
       (snapshot) => {
         const fetchedOrders = snapshot.docs.map((doc) => ({
-            id: doc.id,
+          id: doc.id,
           ...doc.data(),
         }))
         set({ orders: fetchedOrders, loading: false })
@@ -59,10 +59,10 @@ export const useOrderStore = create<OrderStore>((set) => ({
     email: string
   ) => {
     const order: Order = {
-      orderId: `order_${Date.now()}`,
+      orderId: `#${Date.now()}`,
       userId,
-      deliveryAddress:
-        deliveryMethod === 'courier' ? pickupLocation : 'Not applicable',
+	  deliveryMethod,
+      deliveryAddress: pickupLocation,
       email: email,
       products: products,
       createdAt: new Date().toISOString(),

@@ -1,4 +1,5 @@
 'use client'
+import { useDeliveryStore } from '@/storage/DeliveryStore'
 import { useState } from 'react'
 
 const AddressAutocomplete = ({
@@ -9,6 +10,8 @@ const AddressAutocomplete = ({
   const [address, setAddress] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
+  const { setPickupLocation } = useDeliveryStore()
+  console.log('Address', address)
 
   const fetchSuggestions = async (query: string) => {
     const response = await fetch(
@@ -26,6 +29,7 @@ const AddressAutocomplete = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setAddress(value)
+    setPickupLocation(address)
     if (value.length > 2) {
       fetchSuggestions(value)
     } else {
