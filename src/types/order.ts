@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore'
 import Product from './product'
 
 type Order = {
@@ -8,6 +9,6 @@ type Order = {
   pickupLocation: string
   email: string
   products: Product[]
-  createdAt: string
+  createdAt: Timestamp
 }
 export default Order

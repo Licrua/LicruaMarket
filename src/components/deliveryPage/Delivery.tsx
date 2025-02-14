@@ -27,7 +27,7 @@ const Delivery = () => {
   const { createOrder, fetchOrders } = useOrderStore()
   const router = useRouter()
   const [deliveryAddress, setDeliveryAddress] = useState('')
-  const { setStatus } = useProductStore()
+  const { setStatus } = useProductStore()	
 
 
   const handleSubmit = async () => {
@@ -43,7 +43,7 @@ const Delivery = () => {
       currentUser?.uid ?? '',
       products,
       deliveryMethod,
-	  deliveryAddress || pickupLocation,
+	    pickupLocation ,
       currentUser?.email ?? ''
     )
     fetchOrders(currentUser?.uid ?? '')
@@ -55,7 +55,6 @@ const Delivery = () => {
   }, [])
 
   	console.log('pickupLocation', pickupLocation);
-  	console.log('deliveryAddress', deliveryAddress);
 
 	
    

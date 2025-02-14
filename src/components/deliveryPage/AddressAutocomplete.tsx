@@ -1,6 +1,6 @@
 'use client'
 import { useDeliveryStore } from '@/storage/DeliveryStore'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const AddressAutocomplete = ({
   onSelect,
@@ -12,6 +12,10 @@ const AddressAutocomplete = ({
   const [isOpen, setIsOpen] = useState(false)
   const { setPickupLocation } = useDeliveryStore()
   console.log('Address', address)
+
+  useEffect(() => {
+    setPickupLocation(address)
+  }, [address])
 
   const fetchSuggestions = async (query: string) => {
     const response = await fetch(

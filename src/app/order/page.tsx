@@ -8,6 +8,8 @@ import Loading from '../loading'
 
 const Order = () => {
   const orders = useOrderStore((state) => state.orders)
+  console.log('orderssss', orders);
+  
   const [currentOrder, setCurrentOrder] = useState(orders.at(-1))
   //   const deliveryAddress = 'Ростов-на-Дону, ул. Юфимцева 14/2' // Заменить на реальный адрес доставки
   console.log(currentOrder)
@@ -29,8 +31,8 @@ const Order = () => {
         </p>
         <p className="text-gray-600 mb-4">
           Доставка будет по адресу:{' '}
-          <span className="shadow-2xl p-1 font-medium">
-            {currentOrder?.deliveryAddress}
+          <span className="shadow-2xl p-1 bg-slate-300/40 font-medium">
+            {currentOrder?.pickupLocation}
           </span>
         </p>
         <p className="text-gray-600 mb-6">
@@ -38,7 +40,7 @@ const Order = () => {
           <span className="bg-slate-200 p-1">${currentOrder?.email}</span> для
           подтверждения готовности вашего товара
         </p>
-        <Link href="/orders">
+        <Link href="/orderList">
           <button className="btn btn-primary w-full">Перейти в заказы</button>
         </Link>
         <div className="divider divider-neutral">Или</div>
