@@ -15,8 +15,9 @@ import { useRouter } from 'next/navigation'
 const Delivery = () => {
   const products = useProductStore((state) => state.products)
   const currentUser = useAuthStore((state) => state.currentUser)
-//   console.log('productssss', products)
-//   console.log('currentUser', currentUser)
+  const { removeAllProducts } = useProductStore()
+  //   console.log('productssss', products)
+  //   console.log('currentUser', currentUser)
   const {
     deliveryMethod,
     setDeliveryMethod,
@@ -27,8 +28,7 @@ const Delivery = () => {
   const { createOrder, fetchOrders } = useOrderStore()
   const router = useRouter()
   const [deliveryAddress, setDeliveryAddress] = useState('')
-  const { setStatus } = useProductStore()	
-
+  const { setStatus } = useProductStore()
 
   const handleSubmit = async () => {
     if (deliveryMethod === 'pickup' && !pickupLocation) {
@@ -43,21 +43,20 @@ const Delivery = () => {
       currentUser?.uid ?? '',
       products,
       deliveryMethod,
-	    pickupLocation ,
+      pickupLocation,
       currentUser?.email ?? ''
     )
     fetchOrders(currentUser?.uid ?? '')
     router.push('/order')
+    // await removeAllProducts(currentUser?.uid)
   }
 
   useEffect(() => {
     setStatus('received')
   }, [])
 
-  	console.log('pickupLocation', pickupLocation);
+  console.log('pickupLocation', pickupLocation)
 
-	
-   
   return (
     <div className="mt-3">
       <PurchaseProccess />

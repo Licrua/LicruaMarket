@@ -5,17 +5,21 @@ import Link from 'next/link'
 // import Loading from './Loading'
 import { useOrderStore } from '@/storage/OrderStorage'
 import Loading from '../loading'
+import { useProductStore } from '@/storage/ProductStore'
 
 const Order = () => {
   const orders = useOrderStore((state) => state.orders)
-  console.log('orderssss', orders);
-  
+  const { clearCart } = useProductStore()
+  console.log('orderssss', orders)
+
   const [currentOrder, setCurrentOrder] = useState(orders.at(-1))
-  //   const deliveryAddress = 'Ростов-на-Дону, ул. Юфимцева 14/2' // Заменить на реальный адрес доставки
   console.log(currentOrder)
 
   useEffect(() => {
-    // Обновление currentOrder, если orders изменится
+    clearCart()
+  }, [])
+
+  useEffect(() => {
     setCurrentOrder(orders.at(-1))
   }, [orders])
 

@@ -1,0 +1,33 @@
+import { useOrderStore } from '@/storage/OrderStorage'
+import Order from '@/types/order'
+import notify from '@/utils/notify'
+
+function CancelButton({ order }: { order: string }) {
+  const { deleteOrder } = useOrderStore()
+  return (
+    <button
+      onClick={() => {
+        deleteOrder(order)
+        notify.orderDeleted('Заказ успешно удален')
+      }}
+      className="btn absolute top-2 right-2 btn-circle"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  )
+}
+
+export default CancelButton

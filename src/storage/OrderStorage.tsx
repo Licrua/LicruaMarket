@@ -8,6 +8,8 @@ import {
   onSnapshot,
   addDoc,
   Timestamp,
+  deleteDoc,
+  doc,
 } from 'firebase/firestore'
 import Order from '@/types/order'
 import Product from '@/types/product'
@@ -23,11 +25,13 @@ interface OrderStore {
     pickupLocation: string,
     email: string
   ) => Promise<void>
+  deleteOrder: (orderId: string) => Promise<void>
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
   orders: [],
   loading: false,
+
   fetchOrders: (userId: string) => {
     set({ loading: true })
     const ordersQuery = query(
@@ -60,22 +64,51 @@ export const useOrderStore = create<OrderStore>((set) => ({
     pickupLocation: string,
     email: string
   ) => {
-    const order: Order = {
+    if (!userId) return
+
+    const newOrder: Order = {
       orderId: `#${Date.now()}`,
       userId,
       deliveryMethod,
       pickupLocation,
-      email: email,
-      products: products,
+      email,
+      products,
       createdAt: Timestamp.now(),
     }
 
+    // Оптимистично добавляем заказ в Zustand
+    set((state) => ({
+      orders: [newOrder, ...state.orders],
+    }))
+
     try {
       const orderRef = collection(db, 'orders')
-      await addDoc(orderRef, order)
-      console.log('Order successfully saved!')
+      await addDoc(orderRef, newOrder)
+      console.log('Заказ успешно создан!')
     } catch (error) {
-      console.error('Error saving order:', error)
+      console.error('Ошибка при создании заказа:', error)
+
+      // Откатываем состояние, если ошибка
+      set((state) => ({
+        orders: state.orders.filter(
+          (order) => order.orderId !== newOrder.orderId
+        ),
+      }))
+    }
+  },
+
+  deleteOrder: async (orderId: string) => {
+    set((state) => ({
+      orders: state.orders.filter((order) => order.orderId !== orderId),
+    }))
+
+    try {
+      const orderRef = doc(db, 'orders', orderId)
+      await deleteDoc(orderRef)
+      console.log('Заказ успешно удален из базы данных!')
+    } catch (error) {
+      console.error('Ошибка при удалении заказа:', error)
+
     }
   },
 }))

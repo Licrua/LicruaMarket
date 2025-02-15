@@ -7,10 +7,6 @@ import Avatar from '../generalComponents/Avatar'
 import HeaderFrame from './HeaderFrame'
 import HeaderNovbar from './HeaderNovbar'
 import HeaderMenu from './HeaderMenu'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '@/lib/fireBase'
-import { useProductStore } from '@/storage/ProductStore'
-import { useEffect, useMemo } from 'react'
 import useAuthStore from '@/storage/AuthStateStorage'
 
 const Header = () => {

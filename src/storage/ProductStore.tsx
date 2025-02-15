@@ -21,6 +21,7 @@ type ProductStore = {
   addProduct: (product: cardProduct, userId: string) => Promise<void>
   removeProduct: (productId: string) => Promise<void>
   setStatus: (status: string) => void
+  clearCart: () => void
   incrementProduct: (productId: string, userId: string) => Promise<void>
   decrementProduct: (productId: string, userId: string) => Promise<void>
   removeAllProducts: (userId: string | undefined) => Promise<void>
@@ -32,6 +33,7 @@ export const useProductStore = create<ProductStore>((set) => ({
   status: 'registered',
   loading: false,
   setStatus: (status) => set({ status }),
+  clearCart: () => set({ products: [] }),
   fetchProducts: (userId: string) => {
     console.log('db', db)
     set({ loading: true })
