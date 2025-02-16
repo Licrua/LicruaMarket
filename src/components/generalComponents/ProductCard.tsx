@@ -13,6 +13,8 @@ function ProductCard({ product }: { product: cardProduct }) {
   const [error, setError] = useState<string | null>(null)
   const [isPending, setPending] = useState(false)
 
+  console.log('product', product)
+
   const handleBuyClick = async () => {
     if (currentUser) {
       setPending(true)

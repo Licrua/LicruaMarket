@@ -61,7 +61,6 @@ export const useProductStore = create<ProductStore>((set) => ({
         where('userId', '==', userId),
         where('productId', '==', productId)
       )
-
       const productSnapshot = await getDocs(productQuery)
       if (!productSnapshot.empty) {
         const productRef = productSnapshot.docs[0].ref

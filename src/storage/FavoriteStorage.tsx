@@ -1,51 +1,70 @@
+
 import { create } from 'zustand'
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  onSnapshot,
+} from 'firebase/firestore'
+import { db } from '@/lib/fireBase'
 
 interface FavoriteState {
-  favoriteIds: number[] // Массив ID избранных товаров
-  addFavorite: (id: number) => void // Добавить в избранное
-  removeFavorite: (id: number) => void // Удалить из избранного
-  isFavorite: (id: number) => boolean // Проверить, в избранном ли товар
+  favoriteIds: number[] // Список избранных ID товаров
+  addFavorite: (userId: string, id: number) => Promise<void> // Добавить товар в избранное
+  removeFavorite: (userId: string, id: number) => Promise<void> // Удалить товар из избранного
+  isFavorite: (id: number) => boolean // Проверить, находится ли товар в избранном
+  fetchFavorites: (userId: string) => void // Получить список избранных товаров
 }
 
-// Создаем Zustand-хранилище
-const useFavoritesStore = create<FavoriteState>((set, get) => ({
-  // Инициализация состояния (изначально пустой массив)
-  favoriteIds: [],
-  // Метод для добавления товара в избранное
-  addFavorite: (id) => {
-    set((state) => {
-      const updatedFavorites = [...state.favoriteIds, id]
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites)) // Сохраняем в localStorage
-      return { favoriteIds: updatedFavorites }
-    })
+const useFavoritesStore = create<FavoriteState>((set,get) => ({
+  favoriteIds: [], // Начальное состояние — пустой список избранных
+
+  fetchFavorites: (userId) => {
+    const unsubscribe = onSnapshot(
+      doc(db, 'favorites', userId),
+      (docSnap) => {
+        if (docSnap.exists()) {
+          set({ favoriteIds: docSnap.data().favoriteIds || [] })
+        }
+      },
+      (error) => {
+        console.error('Ошибка при получении избранных товаров:', error)
+      }
+    )
+    return unsubscribe // Возвращаем функцию для отписки от изменений
   },
 
-  // Метод для удаления товара из избранного
-  removeFavorite: (id) => {
-    set((state) => {
-      const updatedFavorites = state.favoriteIds.filter((favId) => favId !== id)
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites)) // Обновляем localStorage
-      return { favoriteIds: updatedFavorites }
-    })
+  // Добавление товара в избранное
+  addFavorite: async (userId, id) => {
+    try {
+      set((state) => ({ favoriteIds: [...state.favoriteIds, id] }))
+      const userRef = doc(db, 'favorites', userId)
+      await setDoc(userRef, { favoriteIds: arrayUnion(id) }, { merge: true })
+    } catch (error) {
+      console.error('Ошибка при добавлении в избранное:', error)
+    }
   },
 
-  // Метод для проверки, находится ли товар в избранном
+  // Удаление товара из избранного
+  removeFavorite: async (userId, id) => {
+    try {
+      set((state) => ({
+        favoriteIds: state.favoriteIds.filter((favId) => favId !== id),
+      }))
+      const userRef = doc(db, 'favorites', userId)
+      await updateDoc(userRef, { favoriteIds: arrayRemove(id) })
+    } catch (error) {
+      console.error('Ошибка при удалении из избранного:', error)
+    }
+  },
+
+  // Проверка, находится ли товар в избранном
   isFavorite: (id) => {
-    const favoriteIds = get().favoriteIds // Получаем состояние через get()
-    return favoriteIds.includes(id) // Проверяем, содержится ли ID в массиве
+    return get().favoriteIds.includes(id)
   },
 }))
 
-// export const initializeAuthListener = () => {
-//   const setCurrentUser = useAuthStore.getState().setCurrentUser
-//   onAuthStateChanged(auth, (user) => {
-//     setCurrentUser(user)
-//   })
-// }
 export default useFavoritesStore
-
-// export const useAuthStore = create((set) => ({
-//   user: null,
-//   setUser: (user) => set({ user }),
-//   logout: () => set({ user: null }),
-// }))

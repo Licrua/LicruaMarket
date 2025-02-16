@@ -1,42 +1,45 @@
 'use client'
 
-import FavoriteCard from '@/components/favoritePage/FavoriteCard'
 import FavoriteDivider from '@/components/favoritePage/FavoriteDivider'
-import CardSkeleton from '@/components/generalComponents/CardSkeleton'
 import ProductCard from '@/components/generalComponents/ProductCard'
+import useAuthStore from '@/storage/AuthStateStorage'
 import useFavoritesStore from '@/storage/FavoriteStorage'
 import Product from '@/types/product'
 import { fetchAndStoreProducts } from '@/utils/fetchAndStoreProducts'
+import { loadBundle } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 function Favorite() {
-  const { favoriteIds } = useFavoritesStore()
+  const { favoriteIds, fetchFavorites } = useFavoritesStore()
   const [food, setFood] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true) // Добавляем состояние для загрузки
+  const currentUser = useAuthStore((state) => state.currentUser?.uid)
 
   useEffect(() => {
-    const func = async () => {
-      try {
-        const products = await fetchAndStoreProducts()
-
-        const favoriteProducts = products?.filter((product) =>
-          favoriteIds.includes(product.id)
-        )
-
-        if (favoriteProducts && favoriteProducts.length > 0) {
-          localStorage.setItem('fav', JSON.stringify(favoriteProducts))
-        }
-
-        setFood(favoriteProducts || [])
-      } catch (error) {
-        console.error('Ошибка при загрузке избранных товаров:', error)
+    const loadFavorites = async () => {
+      if (currentUser) {
+        fetchFavorites(currentUser) // Загружаем favoriteIds из Firebase
       }
+      const products = await fetchAndStoreProducts() // Загружаем все продукты
+      const favoriteProducts = products.filter((product) => {
+        console.log('fav', favoriteIds)
+        console.log('prodId', product.id)
+        console.log('result', favoriteIds.includes(product.id))
+
+        return favoriteIds.includes(product.id)
+      })
+      console.log('favoriteIdssss', favoriteIds)
+      console.log('productssss', products)
+
+      setFood(favoriteProducts) // Устанавливаем отфильтрованные товары
+      setLoading(false) // Завершаем загрузку
     }
 
-    func()
-  }, [favoriteIds]) // Запускать каждый раз, когда изменяются favoriteIds
+    loadFavorites()
+  }, [currentUser, favoriteIds])
 
-  if (!food) {
-    return <CardSkeleton />
+  if (loading) {
+    return <div>Загрузка...</div> // Показываем индикатор загрузки
   }
 
   return (
@@ -47,7 +50,7 @@ function Favorite() {
       <FavoriteDivider />
       <div className="grid grid-cols-1 sm:grid-cols-2 m-10 lg:grid-cols-3 gap-6 mt-8">
         {food.length > 0 ? (
-          food?.map((product) => (
+          food.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (

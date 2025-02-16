@@ -24,7 +24,7 @@ function Home() {
       </Head>
       <MainContainer>
         <MainIntro />
-        <MainNavigation />
+        {/* <MainNavigation /> */}
         <MainSaleCards />
         <MainNewCards />
         <MainSalesHit />
