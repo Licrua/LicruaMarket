@@ -16,16 +16,14 @@ function Favorite() {
   const currentUser = useAuthStore((state) => state.currentUser?.uid)
 
   useEffect(() => {
+    console.log('currentUser', currentUser)
+
     const loadFavorites = async () => {
       if (currentUser) {
         fetchFavorites(currentUser) // Загружаем favoriteIds из Firebase
       }
       const products = await fetchAndStoreProducts() // Загружаем все продукты
       const favoriteProducts = products.filter((product) => {
-        console.log('fav', favoriteIds)
-        console.log('prodId', product.id)
-        console.log('result', favoriteIds.includes(product.id))
-
         return favoriteIds.includes(product.id)
       })
       console.log('favoriteIdssss', favoriteIds)
@@ -49,12 +47,12 @@ function Favorite() {
       </h1>
       <FavoriteDivider />
       <div className="grid grid-cols-1 sm:grid-cols-2 m-10 lg:grid-cols-3 gap-6 mt-8">
-        {food.length > 0 ? (
+        {food.length > 0 && currentUser ? (
           food.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="text-center text-gray-500">Нет избранных товаров</p>
+          <p className="mx-auto text-gray-500">Нет избранных товаров либо пользователь не авторизован</p>
         )}
       </div>
     </div>

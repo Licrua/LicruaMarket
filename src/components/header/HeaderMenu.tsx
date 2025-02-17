@@ -1,8 +1,10 @@
 import menuItems from '@/data/header-menu'
+import useAuthStore from '@/storage/AuthStateStorage'
 import { useOrderStore } from '@/storage/OrderStorage'
 import Link from 'next/link'
 
 const HeaderMenu = () => {
+  const currentUser = useAuthStore((state) => state.currentUser)
   const orders = useOrderStore((state) => state.orders)
   return (
     <>
@@ -16,7 +18,7 @@ const HeaderMenu = () => {
                   className="w-4 min-w-3 sm:w-5"
                   alt={item.alt}
                 />
-                {item.alt === 'packageLogo' && (
+                {item.alt === 'packageLogo' && currentUser && (
                   <span className="badge badge-sm">{orders.length}</span>
                 )}
               </Link>

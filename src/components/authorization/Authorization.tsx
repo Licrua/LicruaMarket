@@ -9,6 +9,7 @@ import InputField from '@/components/authorization/InputField'
 import LoginLink from '@/components/authorization/LoginLink'
 import { signinFields, signupFields } from '@/data/auth-fields'
 import Link from 'next/link'
+import ResetPassword from './ResetPassword'
 
 interface AuthFormProps {
   type: 'signIn' | 'signUp'
@@ -17,6 +18,7 @@ interface AuthFormProps {
 const AuthForm = ({ type }: AuthFormProps) => {
   const isSignUp = type === 'signUp'
   const { onSubmit, isPending, error } = useAuth(type)
+  const [isReset, setIsReset] = useState(false)
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -47,7 +49,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
             onChange={handleInputChange}
           />
         ))}
-
         {error && (
           <div
             className={clsx(
@@ -70,16 +71,21 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </div>
         )}
 
-        {!isSignUp && (
+        {/* {!isSignUp && (
           <div className="form-control">
             <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
+              <a
+                href="#"
+                onClick={() => setIsReset(true)}
+                className="label-text-alt link link-hover"
+              >
                 Забыли пароль?
               </a>
             </label>
           </div>
-        )}
-
+        )} */}
+        <ResetPassword />
+        {/* {isReset && <ResetPassword />} */}
         <div className="form-control mt-6">
           <FormButton
             isPending={isPending}

@@ -8,7 +8,7 @@ function CancelButton({ order }: { order: string }) {
     <button
       onClick={() => {
         deleteOrder(order)
-        notify.orderDeleted('Заказ успешно удален')
+        notify.notifySuccess('Заказ успешно удален')
       }}
       className="btn absolute top-2 right-2 btn-circle"
     >

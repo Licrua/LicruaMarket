@@ -67,17 +67,19 @@ function ProductCard({ product }: { product: cardProduct }) {
             Цена: ₽{product.currentPrice}
           </p>
         )}
-        <button
-          disabled={isPending}
-          onClick={handleBuyClick}
-          className={clsx(
-            'btn btn-outline',
-            product.oldPrice && 'border-orange-300',
-            'border-purple-400'
-          )}
-        >
-          Купить
-        </button>
+        <div className="tooltip" data-tip={clsx(isPending ? 'Отправка' : 'Авторизуйтесь')}>
+          <button
+            disabled={isPending || !currentUser}
+            onClick={handleBuyClick}
+            className={clsx(
+              'btn btn-outline',
+              product.oldPrice && 'border-orange-300',
+              'border-purple-400'
+            )}
+          >
+            Купить
+          </button>
+        </div>
         {/* <p>{error}</p> */}
       </div>
     </div>

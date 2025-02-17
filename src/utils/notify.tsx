@@ -2,8 +2,8 @@ import { toast } from 'react-toastify'
 import Link from 'next/link'
 
 const notify = {
-  productError: (text: string | null) => toast.error(text),
-  orderDeleted: (text: string | null) => toast.success(text),
+  notifyError: (text: string | null) => toast.error(text),
+  notifySuccess: (text: string | null) => toast.success(text),
   itemAdded: () =>
     toast.success(
       <div className=" p-3 rounded-lg">

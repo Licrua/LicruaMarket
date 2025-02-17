@@ -36,14 +36,11 @@ const Avatar = () => {
       >
         {currentUser ? (
           <>
-            <li>
+            {/* <li>
               <Link href={'/profile'} className="justify-between">
                 Профиль <span className="badge">Новинка</span>
               </Link>
-            </li>
-            <li>
-              <Link href={'/settings'}>Настройки</Link>
-            </li>
+            </li> */}
             <li>
               <button onClick={handleSignOut}>Выйти</button>
             </li>

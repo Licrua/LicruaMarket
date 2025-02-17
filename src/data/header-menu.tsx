@@ -14,7 +14,7 @@ const menuItems: MenuItem[] = [
   {
     src: 'menuImages/local_fire_department_24dp_UNDEFINED_FILL0_wght400_GRAD0_opsz24.svg',
     alt: 'hotLogo',
-    anchor: '/hit',
+    anchor: '/#hit',
   },
 ]
 
