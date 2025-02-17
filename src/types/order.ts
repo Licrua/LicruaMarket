@@ -5,7 +5,6 @@ type Order = {
   orderId: string
   userId: string | undefined
   deliveryMethod: 'pickup' | 'courier' | null
-  //   deliveryAddress: string
   pickupLocation: string
   email: string
   products: Product[]

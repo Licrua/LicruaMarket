@@ -1,4 +1,3 @@
-// import { Product } from '@/types/Product'
 import Product from '@/types/product'
 import { useProductStore } from '@/storage/ProductStore'
 

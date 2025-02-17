@@ -18,7 +18,6 @@ interface AuthFormProps {
 const AuthForm = ({ type }: AuthFormProps) => {
   const isSignUp = type === 'signUp'
   const { onSubmit, isPending, error } = useAuth(type)
-  const [isReset, setIsReset] = useState(false)
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',

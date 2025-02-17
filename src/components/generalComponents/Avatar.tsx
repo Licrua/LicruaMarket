@@ -1,10 +1,7 @@
 'use client'
-import { auth } from '@/lib/fireBase'
 import useAuthStore from '@/storage/AuthStateStorage'
-import { getAuth, onAuthStateChanged, signOut, User } from 'firebase/auth'
+import { getAuth, signOut,  } from 'firebase/auth'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-// import { auth } from '../../lib/fireBase'
 
 const Avatar = () => {
   const { currentUser } = useAuthStore()
@@ -24,7 +21,6 @@ const Avatar = () => {
         <div className="w-10 p-1 rounded-full">
           <img
             alt="User Avatar"
-            // src={user?.photoURL || '/avatar.avif'}
             srcSet={currentUser ? '/auth.png' : '/unauth.png'}
             referrerPolicy="no-referrer"
           />
@@ -36,11 +32,6 @@ const Avatar = () => {
       >
         {currentUser ? (
           <>
-            {/* <li>
-              <Link href={'/profile'} className="justify-between">
-                Профиль <span className="badge">Новинка</span>
-              </Link>
-            </li> */}
             <li>
               <button onClick={handleSignOut}>Выйти</button>
             </li>

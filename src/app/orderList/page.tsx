@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useOrderStore } from '@/storage/OrderStorage'
 import useAuthStore from '@/storage/AuthStateStorage'
 import timestampToDate from '@/utils/timestampToDate'
@@ -12,23 +12,10 @@ export default function OrderList() {
   const { orders, fetchOrders, loading } = useOrderStore()
   const currentUser = useAuthStore((state) => state.currentUser)
   const { cartTotalSumm } = useCartSummary()
-  const dialogRef = useRef<HTMLDialogElement>(null)
-
-//   const openModal = () => {
-//     if (dialogRef.current) {
-//       dialogRef.current.showModal() // Показываем модальное окно
-//     }
-//   }
-
-//   const closeModal = () => {
-//     if (dialogRef.current) {
-//       dialogRef.current.close() // Закрываем модальное окно
-//     }
-//   }
 
   useEffect(() => {
     fetchOrders(currentUser?.uid ?? '')
-  }, [currentUser])
+  }, [currentUser, fetchOrders])
 
   return (
     <div className="container mx-auto px-4 py-8 ">
@@ -44,7 +31,7 @@ export default function OrderList() {
               key={order.orderId}
               className="bg-white shadow-xl rounded-xl relative p-6 border border-gray-200 hover:shadow-2xl transition duration-300"
             >
-              <CancelButton  order={order.orderId} />
+              <CancelButton order={order.orderId} />
               <h2 className="text-xl font-semibold mb-2">
                 Заказ:{' '}
                 <span className="bg-gray-100 px-2 py-1 rounded-md">

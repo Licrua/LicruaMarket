@@ -24,13 +24,13 @@ function ProductCard({ product }: { product: cardProduct }) {
         setPending(false)
       } catch (err) {
         setError('Ошибка при добавлении покупки. Попробуйте снова.')
-        notify.productError(error)
+        notify.notifyError(error)
         console.error('Ошибка при добавлении покупки:', err)
       } finally {
       }
     } else {
       setError('Пользователь не авторизован.')
-      notify.productError(error)
+      notify.notifyError(error)
     }
   }
 

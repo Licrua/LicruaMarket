@@ -1,4 +1,3 @@
-// register.js
 import registerUser from './auth';
 import storeUserData from './firestore';
 

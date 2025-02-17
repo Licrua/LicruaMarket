@@ -1,8 +1,6 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import FavoriteButton from './FavoriteButton'
 
-function CardImage({ src, alt, id }: { src: string; alt: string; id: number }) {
+function CardImage({ src, alt, id }: { src: string | undefined; alt: string | undefined; id: number | undefined }) {
   return (
     <div className="relative w-full">
       <img

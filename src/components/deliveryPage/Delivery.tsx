@@ -15,15 +15,11 @@ import { useRouter } from 'next/navigation'
 const Delivery = () => {
   const products = useProductStore((state) => state.products)
   const currentUser = useAuthStore((state) => state.currentUser)
-  const { removeAllProducts } = useProductStore()
-  //   console.log('productssss', products)
-  //   console.log('currentUser', currentUser)
   const {
     deliveryMethod,
     setDeliveryMethod,
     setPickupLocation,
     pickupLocation,
-    // createOrder,
   } = useDeliveryStore()
   const { createOrder, fetchOrders } = useOrderStore()
   const router = useRouter()
@@ -32,11 +28,11 @@ const Delivery = () => {
 
   const handleSubmit = async () => {
     if (deliveryMethod === 'pickup' && !pickupLocation) {
-      notify.productError('Укажите место самовывоза')
+      notify.notifyError('Укажите место самовывоза')
       return
     }
     if (deliveryMethod === 'courier' && !deliveryAddress) {
-      notify.productError('Укажите адрес для доставки курьером!')
+      notify.notifyError('Укажите адрес для доставки курьером!')
       return
     }
     await createOrder(
@@ -48,12 +44,11 @@ const Delivery = () => {
     )
     fetchOrders(currentUser?.uid ?? '')
     router.push('/order')
-    // await removeAllProducts(currentUser?.uid)
   }
 
   useEffect(() => {
     setStatus('received')
-  }, [])
+  }, [setStatus])
 
   console.log('pickupLocation', pickupLocation)
 

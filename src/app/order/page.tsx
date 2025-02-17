@@ -17,7 +17,7 @@ const Order = () => {
 
   useEffect(() => {
     clearCart()
-  }, [])
+  }, [clearCart])
 
   useEffect(() => {
     setCurrentOrder(orders.at(-1))

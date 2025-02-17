@@ -3,21 +3,18 @@
 import PurchaseProccess from '@/components/generalComponents/PurchaseProccess'
 import { useCartSummary } from '@/hooks/useCartSummary'
 import { useProductStore } from '@/storage/ProductStore'
-import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import CartItem from './CartItem'
 import CartSummary from './CartSummary'
 import CartEmptyState from './CartEmptyState'
-// import CartEmptyState from './CartEmptyState'
 
 const CartPage = () => {
-//   const router = useRouter()
   const { products, setStatus } = useProductStore()
   const { cartTotalSumm } = useCartSummary()
 
   useEffect(() => {
     setStatus('selectedProducts')
-  }, [])
+  }, [setStatus])
 
   return (
     <div className="container mx-auto p-4 sm:p-10">

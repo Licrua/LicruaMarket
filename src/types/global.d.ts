@@ -1,3 +1,3 @@
-declare module globalThis {
-	var GOOGLE_MAPS_API_KEY: string;
+declare namespace globalThis {
+	let GOOGLE_MAPS_API_KEY: string;
   }

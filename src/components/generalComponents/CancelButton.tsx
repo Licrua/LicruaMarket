@@ -1,5 +1,4 @@
 import { useOrderStore } from '@/storage/OrderStorage'
-import Order from '@/types/order'
 import notify from '@/utils/notify'
 
 function CancelButton({ order }: { order: string }) {

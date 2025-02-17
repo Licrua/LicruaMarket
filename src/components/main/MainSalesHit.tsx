@@ -1,6 +1,5 @@
 import { newProducts } from '@/types/cards'
 import Headline from '../generalComponents/HeadLine'
-import CardImage from '../generalComponents/CardImage'
 import ProductCard from '../generalComponents/ProductCard'
 
 async function MainLeaderCards() {

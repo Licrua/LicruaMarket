@@ -10,7 +10,6 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartTotalSumm }) => {
   const router = useRouter()
   const { products, removeAllProducts } = useProductStore()
   const currentUser = useAuthStore((state) => state.currentUser)
-  console.log('currentUser', currentUser)
 
   return (
     <div className="flex justify-between flex-col sm:flex-row items-center mb-5">

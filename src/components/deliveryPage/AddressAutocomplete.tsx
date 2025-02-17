@@ -15,7 +15,7 @@ const AddressAutocomplete = ({
 
   useEffect(() => {
     setPickupLocation(address)
-  }, [address])
+  }, [address, setPickupLocation])
 
   const fetchSuggestions = async (query: string) => {
     const response = await fetch(

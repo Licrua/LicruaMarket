@@ -1,12 +1,10 @@
 'use client'
-
 import FavoriteDivider from '@/components/favoritePage/FavoriteDivider'
 import ProductCard from '@/components/generalComponents/ProductCard'
 import useAuthStore from '@/storage/AuthStateStorage'
 import useFavoritesStore from '@/storage/FavoriteStorage'
 import Product from '@/types/product'
 import { fetchAndStoreProducts } from '@/utils/fetchAndStoreProducts'
-import { loadBundle } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 function Favorite() {
@@ -34,7 +32,7 @@ function Favorite() {
     }
 
     loadFavorites()
-  }, [currentUser, favoriteIds])
+  }, [currentUser, favoriteIds, fetchFavorites])
 
   if (loading) {
     return <div>Загрузка...</div> // Показываем индикатор загрузки
@@ -52,7 +50,9 @@ function Favorite() {
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="mx-auto text-gray-500">Нет избранных товаров либо пользователь не авторизован</p>
+          <p className="mx-auto text-gray-500">
+            Нет избранных товаров либо пользователь не авторизован
+          </p>
         )}
       </div>
     </div>

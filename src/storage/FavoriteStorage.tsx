@@ -2,7 +2,6 @@
 import { create } from 'zustand'
 import {
   doc,
-  getDoc,
   setDoc,
   updateDoc,
   arrayUnion,
@@ -14,7 +13,7 @@ import { db } from '@/lib/fireBase'
 interface FavoriteState {
   favoriteIds: number[] // Список избранных ID товаров
   addFavorite: (userId: string, id: number) => Promise<void> // Добавить товар в избранное
-  removeFavorite: (userId: string, id: number) => Promise<void> // Удалить товар из избранного
+  removeFavorite: (userId: string , id: number ) => Promise<void> // Удалить товар из избранного
   isFavorite: (id: number) => boolean // Проверить, находится ли товар в избранном
   fetchFavorites: (userId: string) => void // Получить список избранных товаров
 }

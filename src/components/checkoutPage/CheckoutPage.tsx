@@ -13,7 +13,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     setStatus('paid')
-  }, [])
+  }, [setStatus])
 
   return (
     <div className="container mx-auto p-1 sm:p-2">
