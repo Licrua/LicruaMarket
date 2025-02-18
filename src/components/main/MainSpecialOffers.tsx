@@ -4,7 +4,7 @@ import playfairDisplay from '@/fonts/header-font'
 function MainSpecialOffers() {
   return (
     <div className="flex p-5 justify-center">
-      <div className="carousel w-full h-[300px] min-h-[300px] flex">
+      <div className="carousel w-full border-3 shadow-xl min-h-[300px] flex">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -19,15 +19,19 @@ function MainSpecialOffers() {
                 : {}
             }
           >
-            {/* Контейнер для выравнивания содержимого */}
-            <div className="absolute inset-1/2 max-w-[200px] flex flex-col items-center justify-center">
+            {/* Затемняющий слой */}
+            <div className="absolute inset-0 bg-black/30"></div>
+
+            {/* Контейнер для текста */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
               <h2
-                className={`${playfairDisplay.className} tracking-widest leading-tight text-center text-3xl font-extrabold text-white`}
+                className={`${playfairDisplay.className} text-white text-3xl font-extrabold tracking-widest leading-tight drop-shadow-md`}
               >
                 {slide.title}
               </h2>
-             
             </div>
+
+            {/* Кнопки переключения */}
             <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
               <a
                 href={slide.btnLinks.prev}
@@ -49,4 +53,4 @@ function MainSpecialOffers() {
   )
 }
 
-export default MainSpecialOffers
+export default MainSpecialOffers;

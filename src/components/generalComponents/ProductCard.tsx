@@ -67,7 +67,10 @@ function ProductCard({ product }: { product: cardProduct }) {
             Цена: ₽{product.currentPrice}
           </p>
         )}
-        <div className="tooltip" data-tip={clsx(isPending ? 'Отправка' : 'Авторизуйтесь')}>
+        <div
+          className="tooltip"
+          data-tip={clsx(!currentUser ? 'Авторизуйтесь' : 'Купить')}
+        >
           <button
             disabled={isPending || !currentUser}
             onClick={handleBuyClick}
@@ -80,7 +83,6 @@ function ProductCard({ product }: { product: cardProduct }) {
             Купить
           </button>
         </div>
-        {/* <p>{error}</p> */}
       </div>
     </div>
   )

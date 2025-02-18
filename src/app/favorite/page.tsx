@@ -24,8 +24,7 @@ function Favorite() {
       const favoriteProducts = products.filter((product) => {
         return favoriteIds.includes(product.id)
       })
-      console.log('favoriteIdssss', favoriteIds)
-      console.log('productssss', products)
+   
 
       setFood(favoriteProducts) // Устанавливаем отфильтрованные товары
       setLoading(false) // Завершаем загрузку
