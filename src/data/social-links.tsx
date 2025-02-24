@@ -7,19 +7,19 @@ const socialLinks: SocialLink[] = [
     img: (
 	  '/footerLogos/vk.png'
     ),
-    url: 'https://vk.com'
+    url: 'https://vk.com/hgn41'
   },
   {
     id: 'telegram',
     name: 'Telegram',
 	img: '/footerLogos/telegram.png',
-    url: 'https://telegram.org'
+    url: 'https://t.me/Ilya01034'
   },
   {
     id: 'email',
     name: 'Email',
     img: '/footerLogos/mail.png',
-    url: 'mailto:example@mail.com',
+    url: 'mailto:ilay1275@mail.ru',
   }
 ];
 
