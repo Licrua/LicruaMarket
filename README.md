@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Онлайн-магазин продуктов
 
-## Getting Started
+Добро пожаловать в репозиторий моего проекта — онлайн-магазина продуктов! Здесь представлен современный e-commerce сайт, разработанный с использованием **Next.js 15** и **Tailwind CSS** с использованием компонентов **DaisyUI"".
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔗 Демо
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[🖥 Посмотреть магазин](licrua-market-243o.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📌 О проекте
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Этот проект — полноценный интернет-магазин для продажи продуктов питания. Он включает в себя:
 
-## Learn More
+- 🛍 Каталог товаров с категориями
+- 🔎 Поиск товаров
+- 🛒 Корзину с динамическим обновлением
+- 📦 Оформление заказа
+- 🔄 Систему авторизации и управления пользователями
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠 Используемые технологии
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js 15** – SSR, динамическая маршрутизация
+- **TypeScript** – строгая типизация для надежного кода
+- **Tailwind CSS** – удобная и гибкая стилизация
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🔧 Запуск проекта
+
+1. Клонируйте репозиторий:
+   ```sh
+   git clone https://github.com/Licrua/LicruaMarket.git
+   ```
+2. Установите зависимости:
+   ```sh
+   npm install
+   ```
+3. Запустите локальный сервер:
+   ```sh
+   npm run dev
+   ```
+
+## 📬 Контакты
+
+- **Email:** ilay1275@mail.ru
+- **Telegram:** [@yourusername](https://t.me/@Ilya01034 )
+- **LinkedIn:** [your-profile](https://linkedin.com/in/yourprofile)
+
+Если вам понравился проект, поставьте ⭐ и подпишитесь на обновления! 😊
+
+
+
+
