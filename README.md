@@ -46,7 +46,6 @@
 
 - **Email:** ilay1275@mail.ru
 - **Telegram:** [@yourusername](https://t.me/@Ilya01034 )
-- **LinkedIn:** [your-profile](https://linkedin.com/in/yourprofile)
 
 Если вам понравился проект, поставьте ⭐ и подпишитесь на обновления! 😊
 
